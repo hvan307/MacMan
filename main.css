@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  height: 600px;
+  width: 600px;
+}
+
+.cell {
+  height: 6.67%;
+  width: 6.66%;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.eater {
+  background-image: url(images/eater.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.analogScale {
+  background-image: url(images/analog.png);
+  background-size: cover;
+  background-position: center;
+}
+
+#avocado {
+  background-image: url(images/avocado.png);
+  background-size: contain;
+}
+
+#fries {
+  background-image: url(images/fries.png);
+  background-size: contain;
+}
