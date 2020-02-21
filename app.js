@@ -4,7 +4,7 @@ function main() {
   const gridCellCount = height * width
   const grid = document.querySelector('.grid')
   const cells = []
-  let eaterPosition = 2
+  let eaterPosition = 127
   let analogPosition = 22
 
   for (let i = 0; i < gridCellCount; i++) {
@@ -25,7 +25,7 @@ function main() {
       if (eaterPosition === cells.length - 1) {
         return
       }
-      //  } if (eaterPosition === width) {
+      //  } if (eaterPosition === width || eaterPosition === ) {
       //   cells[eaterPosition].classList.remove('eater')
       // block pacman from going down a row and make him go off the grid and appear on the opposite end of the row instead
       // eaterPosition -= width
@@ -76,6 +76,9 @@ function main() {
   coordinates()
   console.log(eaterCoordinates)
 
+  // const analogInterval = setInterval(() => {
+  //   if (Math.abs(eaterCoordinates - analogCoordinates) === [])
+  // }, 20000)
 
 
 
