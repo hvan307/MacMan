@@ -4,7 +4,7 @@ function main() {
   const gridCellCount = height * width
   const grid = document.querySelector('.grid')
   const cells = []
-  let eaterPosition = 58
+  let eaterPosition = 2
   let analogPosition = 22
 
   for (let i = 0; i < gridCellCount; i++) {
@@ -25,6 +25,13 @@ function main() {
       if (eaterPosition === cells.length - 1) {
         return
       }
+      //  } if (eaterPosition === width) {
+      //   cells[eaterPosition].classList.remove('eater')
+      // block pacman from going down a row and make him go off the grid and appear on the opposite end of the row instead
+      // eaterPosition -= width
+      // cells[eaterPosition].classList.add('eater')
+      // return
+
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += 1
       cells[eaterPosition].classList.add('eater')
@@ -35,8 +42,6 @@ function main() {
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= 1
       cells[eaterPosition].classList.add('eater')
-      console.log(eaterPosition)
-      console.log(eaterPosition % width)
 
     } else if (event.key === 'ArrowUp') {
       if (eaterPosition < width) {
@@ -54,13 +59,24 @@ function main() {
       cells[eaterPosition].classList.add('eater')
     }
   })
-  let analogPath = []
-  let distance = Math.abs(analogPosition - eaterPosition)
-  console.log(distance)
-  while (distance < 15) {
-    chase ()
-    break
-  } 
+
+  let eaterCoordinates = []
+  let analogCoordinates = []
+  function coordinates() {
+    console.log('eater position:', eaterPosition)
+    const eaterX = (eaterPosition + 1) % width
+    console.log('eater X:', eaterX)
+    const eaterY = ((eaterPosition + 1) - eaterX) / width
+    console.log('eater Y:', eaterY)
+    eaterCoordinates.push(eaterX, eaterY)
+    const analogX = (analogPosition + 1) % width
+    const analogY = ((analogPosition + 1) - analogX) / width
+    analogCoordinates.push(analogX, analogY)
+  }
+  coordinates()
+  console.log(eaterCoordinates)
+
+
 
 
 
