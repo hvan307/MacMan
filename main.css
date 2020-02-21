@@ -32,7 +32,7 @@ body {
   background-position: center;
 }
 
-.analogScale {
+.scale1 {
   background-image: url(images/evil-scale.png);
   background-size: contain;
 }

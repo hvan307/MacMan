@@ -5,7 +5,13 @@ function main() {
   const grid = document.querySelector('.grid')
   const cells = []
   let eaterPosition = 127
-  let analogPosition = 22
+  let scale1Position = 22
+
+  const up = height - 1
+  const right = width + 1
+  const down = height + 1
+  const left = width - 1
+
 
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
@@ -13,12 +19,24 @@ function main() {
     if (i === eaterPosition) {
       cell.classList.add('eater')
     }
-    if (i === analogPosition) {
-      cell.classList.add('analogScale')
+    if (i === scale1Position) {
+      cell.classList.add('scale1')
+    }
+    if (i !== eaterPosition && i !== scale1Position) {
+      cell.classList.add('fries')
     }
     grid.appendChild(cell)
     cells.push(cell)
   }
+  const scale1Interval = setInterval(() => {
+    if (scale1Position === 0) {
+      clearInterval(scale1Interval)
+      return
+    }
+    cells[scale1Position].classList.remove('scale1')
+    scale1Position -= 1
+    cells[scale1Position].classList.add('scale1')
+  }, 100)
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight') {
@@ -61,7 +79,7 @@ function main() {
   })
 
   let eaterCoordinates = []
-  let analogCoordinates = []
+  let scale1Coordinates = []
   function coordinates() {
     console.log('eater position:', eaterPosition)
     const eaterX = (eaterPosition + 1) % width
@@ -69,16 +87,27 @@ function main() {
     const eaterY = ((eaterPosition + 1) - eaterX) / width
     console.log('eater Y:', eaterY)
     eaterCoordinates.push(eaterX, eaterY)
-    const analogX = (analogPosition + 1) % width
-    const analogY = ((analogPosition + 1) - analogX) / width
-    analogCoordinates.push(analogX, analogY)
+    const scale1X = (scale1Position + 1) % width
+    const scale1Y = ((scale1Position + 1) - scale1X) / width
+    scale1Coordinates.push(scale1X, scale1Y)
   }
   coordinates()
   console.log(eaterCoordinates)
 
-  // const analogInterval = setInterval(() => {
-  //   if (Math.abs(eaterCoordinates - analogCoordinates) === [])
-  // }, 20000)
+  // SCALE 1 
+  let direction = 0
+  function randomDirection() {
+    const moves = (direction === left || direction === right) ?
+      [up, down] : [left, right]
+    return moves[Math.floor(Math.random() * 2)]
+  }
+
+  console.log(randomDirection)
+
+
+
+
+
 
 
 
