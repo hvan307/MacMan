@@ -44,38 +44,33 @@ function main() {
     grid.appendChild(cell)
     cells.push(cell)
   }
-  const scale1Interval = setInterval(() => {
-    if (scale1Position === 0) {
-      clearInterval(scale1Interval)
-      return
-    }
+  // const scale1Interval = setInterval(() => {
+  //   if (scale1Position === 0) {
+  //     clearInterval(scale1Interval)
+  //     return
+  //   }
 
-    cells[scale1Position].classList.remove('scale1')
-    cells[scale1Position].classList.add('fries')
-    scale1Position -= 1
-    cells[scale1Position].classList.remove('fries')
-    cells[scale1Position].classList.add('scale1')
-  }, 100)
+  //   cells[scale1Position].classList.remove('scale1')
+  //   cells[scale1Position].classList.add('fries')
+  //   scale1Position -= 1
+  //   cells[scale1Position].classList.remove('fries')
+  //   cells[scale1Position].classList.add('scale1')
+  // }, 100)
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight') {
       if (eaterPosition === cells.length - 1) {
-        return
+        cells[cells.length - 1].classList.remove('eater')
+        eaterPosition = (cells.length - 1) - width
       }
-      //  } if (eaterPosition === width) {
-      //   cells[eaterPosition].classList.remove('eater')
-      // block pacman from going down a row and make him go off the grid and appear on the opposite end of the row instead
-      // eaterPosition -= width
-      // cells[eaterPosition].classList.add('eater')
-      // return
-
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += 1
       cells[eaterPosition].classList.remove('fries')
       cells[eaterPosition].classList.add('eater')
     } else if (event.key === 'ArrowLeft') {
       if (eaterPosition === 0) {
-        return
+        cells[0].classList.remove('eater')
+        eaterPosition = 0 + width
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= 1
