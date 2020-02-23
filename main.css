@@ -17,13 +17,13 @@ body {
   border: 1px solid black;
   height: 600px;
   width: 600px;
+  border-radius: 5px;
 }
 
 .cell {
   height: 6.67%;
   width: 6.66%;
   background-color: white;
-  border: 1px solid black;
 }
 
 .eater {
@@ -37,6 +37,21 @@ body {
   background-size: contain;
 }
 
+.scale2 {
+  background-image: url(images/scale2.jpg);
+  background-size: contain;
+}
+
+.scale3 {
+  background-image: url(images/scale3.jpg);
+  background-size: contain;
+}
+
+.scale4 {
+  background-image: url(images/scale4.png);
+  background-size: contain;
+}
+
 #avocado {
   background-image: url(images/avocado.png);
   background-size: contain;
@@ -45,5 +60,9 @@ body {
 .fries {
   background-image: url(images/fries-empty-logo.png);
   background-size: contain;
-  display: block;
+}
+
+.walls {
+  background-image: url(images/walls.png);
+  background-size: contain;
 }
