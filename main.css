@@ -42,7 +42,8 @@ body {
   background-size: contain;
 }
 
-#fries {
-  background-image: url(images/fries-cartoon.png);
+.fries {
+  background-image: url(images/fries-empty-logo.png);
   background-size: contain;
+  display: block;
 }
