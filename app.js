@@ -8,26 +8,56 @@ function main() {
   const walls = []
   let eaterPosition = 112
   let scale1Position = 22
+  let ghostMove = 1
+
+
+  const scale1Interval = setInterval(() => {
+    if (scale1Position === 0) {
+      clearInterval(scale1Interval)
+      return
+    }
+    cells[scale1Position].classList.remove('scale1')
+    cells[scale1Position].classList.add('fries')
+    scale1Position += ghostMove
+    cells[scale1Position].classList.remove('fries')
+    cells[scale1Position].classList.add('scale1')
 
 
 
-
-  function scale1() {
-
-    const scale1Interval = setInterval(() => {
-      if (scale1Position === 0) {
-        clearInterval(scale1Interval)
-        return
-      }
+    if (cells[scale1Position - 1].classList.contains('walls')) {
+      cells[scale1Position].classList.remove('scale1')
+      cells[scale1Position].classList.add('fries')
+      scale1Position += 1
+      cells[scale1Position + 1].classList.remove('fries')
+      cells[scale1Position + 1].classList.add('scale1')
+      console.log('there is a wall behind')
+    } else if (cells[scale1Position + 1].classList.contains('walls')) {
       cells[scale1Position].classList.remove('scale1')
       cells[scale1Position].classList.add('fries')
       scale1Position -= 1
-      cells[scale1Position].classList.remove('fries')
-      cells[scale1Position].classList.add('scale1')
-      // randomDirection
+      cells[scale1Position - 1].classList.remove('fries')
+      cells[scale1Position - 1].classList.add('scale1')
+      console.log('there is a wall ahead')
+    } else if (cells[scale1Position].classList.remove('scale1')) {
+      cells[scale1Position].classList.add('fries')
+      scale1Position -= width
+      cells[scale1Position - width].classList.remove('fries')
+      cells[scale1Position - width].classList.add('scale1')
+      console.log('plain sailing')
+      // } if (cells[scale1Position - width].classList.contains('walls')) {
+      //     
+    } else {
+      // cells[scale1Position].classList.remove('scale1')
+      cells[scale1Position].classList.add('fries')
+      scale1Position += width
+      cells[scale1Position + width].classList.remove('fries')
+      cells[scale1Position + width].classList.add('scale1')
+      console.log('there is a wall behind')
 
-    }, 100)
-  }
+    }
+
+  }, 500)
+
   let eaterCoordinates = []
   let scale1Coordinates = []
   function coordinatesEater() {
@@ -68,13 +98,14 @@ function main() {
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
     cell.classList.add('cell')
-    cell.classList.add('fries')
+    // cell.classList.add('fries')
 
     if (i === eaterPosition) {
       cell.classList.remove('fries')
       cell.classList.add('eater')
     }
     if (i === scale1Position) {
+      cell.classList.remove('fries')
       cell.classList.add('scale1')
     }
     while (i !== 0 && i < width - 1 || i !== width * 15 - 1 && i !== width * 15 - 2 && i > width * 15 - width + 1) {
@@ -112,7 +143,6 @@ function main() {
     cells.push(cell)
   }
 
-
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight') {
       if (eaterPosition === cells.length - 1) {
@@ -123,7 +153,7 @@ function main() {
         eaterPosition -= width - 1
         cells[0].classList.remove('fries')
         cells[0].classList.add('eater')
-      } 
+      }
       if (eaterPosition === width * 2 - 1 || eaterPosition === width * 4 - 1 || eaterPosition === width * 6 - 1 || eaterPosition === width * 7 - 1 || eaterPosition === width * 8 - 1 || eaterPosition === width * 9 - 1 || eaterPosition === width * 10 - 1) {
         cells[eaterPosition].classList.remove('eater')
         eaterPosition -= width
@@ -153,7 +183,7 @@ function main() {
         eaterPosition += width
       }
       if (cells[eaterPosition - 1].classList.contains('walls')) {
-        return 
+        return
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= 1
@@ -182,6 +212,15 @@ function main() {
       cells[eaterPosition].classList.add('eater')
     }
   })
+
+  let eaterPath = []
+  while (document.onkeydown) {
+    const move = event.key.value
+    console.log(move)
+    eaterPath.push(move)
+  }
+
+  console.log(eaterPath)
 
   // for (let i = 0; i < walls.length; i++) {
   //   walls[i].classList.add('walls')
