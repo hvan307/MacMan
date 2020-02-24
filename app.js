@@ -4,26 +4,33 @@ function main() {
   const gridCellCount = height * width
   const grid = document.querySelector('.grid')
   const cells = []
-  const scale1path = []
-  const walls = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+  const scale1zone = []
+  const walls = []
   let eaterPosition = 112
   let scale1Position = 22
 
 
-  const up = height - 1
-  const right = width + 1
-  const down = height + 1
-  const left = width - 1
-  const direction = [up, right, down, left]
-  // SCALE 1 
-  const randomDirection = direction[Math.floor(Math.random() * direction.length)]
-  // const moves = (!cells.contains.classList('eater') || !cells.contains.classList('scale1')) ?
-  //   [up, down] : [left, right]
-  console.log(randomDirection)
 
+
+  function scale1() {
+
+    const scale1Interval = setInterval(() => {
+      if (scale1Position === 0) {
+        clearInterval(scale1Interval)
+        return
+      }
+      cells[scale1Position].classList.remove('scale1')
+      cells[scale1Position].classList.add('fries')
+      scale1Position -= 1
+      cells[scale1Position].classList.remove('fries')
+      cells[scale1Position].classList.add('scale1')
+      // randomDirection
+
+    }, 100)
+  }
   let eaterCoordinates = []
   let scale1Coordinates = []
-  function coordinates() {
+  function coordinatesEater() {
     console.log('eater position:', eaterPosition)
     const eaterX = (eaterPosition + 1) % width
     console.log('eater X:', eaterX)
@@ -31,6 +38,10 @@ function main() {
     console.log('eater Y:', eaterY)
     eaterCoordinates.push(eaterX, eaterY)
     console.log('eater coordinates:', eaterCoordinates)
+  }
+  coordinatesEater()
+
+  function coordinatesScale1() {
     console.log('scale1 position:', scale1Position)
     const scale1X = (scale1Position + 1) % width
     console.log('scale1 X:', scale1X)
@@ -39,8 +50,18 @@ function main() {
     scale1Coordinates.push(scale1X, scale1Y)
     console.log('scale1 coordinates:', scale1Coordinates)
   }
-  coordinates()
+  coordinatesScale1()
 
+  // const up = scale1Y - width
+  // const right = scale1X + 1
+  // const down = scale1Y + width
+  // const left = scale1X - 1
+  // const direction = [up, right, down, left]
+  // SCALE 1 
+  // const randomDirection = direction[Math.floor(Math.random() * direction.length)]
+  // const moves = (!cells.contains.classList('eater') || !cells.contains.classList('scale1')) ?
+  //   [up, down] : [left, right]
+  // console.log(randomDirection)
 
 
 
@@ -90,37 +111,49 @@ function main() {
     grid.appendChild(cell)
     cells.push(cell)
   }
-  const scale1Interval = setInterval(() => {
-    if (scale1Position === 0) {
-      clearInterval(scale1Interval)
-      return
-    }
-    cells[scale1Position].classList.remove('scale1')
-    cells[scale1Position].classList.add('fries')
-    scale1Position -= 1
-    cells[scale1Position].classList.remove('fries')
-    cells[scale1Position].classList.add('scale1')
 
-  }, 100)
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight') {
       if (eaterPosition === cells.length - 1) {
         cells[cells.length - 1].classList.remove('eater')
         eaterPosition = (cells.length - 1) - width
+      } if (eaterPosition === width - 1) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition -= width - 1
+        cells[0].classList.remove('fries')
+        cells[0].classList.add('eater')
+      } 
+      if (eaterPosition === width * 2 - 1 || eaterPosition === width * 4 - 1 || eaterPosition === width * 6 - 1 || eaterPosition === width * 7 - 1 || eaterPosition === width * 8 - 1 || eaterPosition === width * 9 - 1 || eaterPosition === width * 10 - 1) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition -= width
+        cells[eaterPosition].classList.add('eater')
       }
-      // } if (eaterPosition.contains('wall')) {
-      //   return
-      // }
-
+      if (cells[eaterPosition + 1].classList.contains('walls')) {
+        return
+      }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += 1
       cells[eaterPosition].classList.remove('fries')
       cells[eaterPosition].classList.add('eater')
     } else if (event.key === 'ArrowLeft') {
       if (eaterPosition === 0) {
-        cells[0].classList.remove('eater')
-        eaterPosition = 0 + width
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition = width - 1
+        cells[width - 1].classList.remove('fries')
+        cells[width - 1].classList.add('eater')
+      } if (eaterPosition === width * 14) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition += width - 1
+        cells[width * 15 - 1].classList.remove('fries')
+        cells[width * 15 - 1].classList.add('eater')
+      }
+      if (eaterPosition === width || eaterPosition === width * 3 || eaterPosition === width * 5 || eaterPosition === width * 6 || eaterPosition === width * 7 || eaterPosition === width * 8 || eaterPosition === width * 9) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition += width
+      }
+      if (cells[eaterPosition - 1].classList.contains('walls')) {
+        return 
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= 1
@@ -130,17 +163,17 @@ function main() {
     } else if (event.key === 'ArrowUp') {
       if (eaterPosition < width) {
         return
+      } if (cells[eaterPosition - width].classList.contains('walls')) {
+        return
       }
-      // } if (cells[eaterPosition].contains('wall')) {
-      //   return 
-      // }
-
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= width
       cells[eaterPosition].classList.remove('fries')
       cells[eaterPosition].classList.add('eater')
     } else if (event.key === 'ArrowDown') {
       if (eaterPosition > cells.length - width - 1) {
+        return
+      } if (cells[eaterPosition + width].classList.contains('walls')) {
         return
       }
       cells[eaterPosition].classList.remove('eater')
@@ -157,9 +190,9 @@ function main() {
   // function map() {
   //   if (height = 1) 
   // }
-function find() {
+  function find() {
 
-}
+  }
 
 
 }
