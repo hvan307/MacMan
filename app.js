@@ -10,7 +10,7 @@ function main() {
   let scale1Position = 22
   let ghostMove = 1
 
-
+// SET INTERVAL SCALE 1
   const scale1Interval = setInterval(() => {
     if (scale1Position === 0) {
       clearInterval(scale1Interval)
@@ -27,7 +27,7 @@ function main() {
     if (cells[scale1Position - 1].classList.contains('walls')) {
       cells[scale1Position].classList.remove('scale1')
       cells[scale1Position].classList.add('fries')
-      scale1Position += 1
+      scale1Position += ghostMove
       cells[scale1Position + 1].classList.remove('fries')
       cells[scale1Position + 1].classList.add('scale1')
       console.log('there is a wall behind')
@@ -58,6 +58,7 @@ function main() {
 
   }, 500)
 
+  // COORDINATES
   let eaterCoordinates = []
   let scale1Coordinates = []
   function coordinatesEater() {
@@ -94,7 +95,7 @@ function main() {
   // console.log(randomDirection)
 
 
-
+  // DRAWING A GRID 
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
     cell.classList.add('cell')
@@ -108,16 +109,19 @@ function main() {
       cell.classList.remove('fries')
       cell.classList.add('scale1')
     }
+    // TOP AND BOTTOM WALLS
     while (i !== 0 && i < width - 1 || i !== width * 15 - 1 && i !== width * 15 - 2 && i > width * 15 - width + 1) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
       break
     }
+    // SCALE HOUSE WALLS
     while (i >= 35 && i <= 36 || i >= 38 && i <= 39 || i === 50 || i === 54 || i >= 65 && i <= 69) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
       break
     }
+    // SCATTERED MAP WALLS
     while (i === width * 2 || i >= width * 2 + 2 && i <= width * 2 + 3 || i >= width * 3 - 4 && i <= width * 3 - 3 || i === width * 3 - 1 || i === width * 4 || i >= width * 4 + 2 && i <= width * 4 + 3 || i >= width * 5 - 4 && i <= width * 5 - 3 || i === width * 5 - 1 || i === width * 6 + 1 || i >= width * 6 + 3 && i <= width * 6 + 6 || i >= width * 7 - 7 && i <= width * 7 - 4 || i === width * 7 - 2 || i === width * 7 + 1 || i === width * 8 - 2 || i === width * 8 + 1 || i >= width * 8 + 3 && i <= width * 8 + 6 || i >= width * 9 - 7 && i <= width * 9 - 4 || i === width * 9 - 2 || i === width * 10 || i === width * 11 - 1 || i >= width * 10 + 2 && i <= width * 10 + 3 || i >= width * 10 + 5 && i <= width * 10 + 6 || i >= width * 11 - 7 && i <= width * 11 - 6 || i >= width * 11 - 4 && i <= width * 11 - 3 || i === width * 11 || i >= width * 11 + 2 && i <= width * 11 + 3 || i >= width * 12 - 4 && i <= width * 12 - 3 || i === width * 12 - 1 || i === width * 12 || i >= width * 12 + 2 && i <= width * 12 + 3 || i >= width * 12 + 5 && i <= width * 12 + 6 || i >= width * 13 - 7 && i <= width * 13 - 6 || i >= width * 13 - 4 && i <= width * 13 - 3 || i === width * 13 - 1 || i === width * 13 || i === width * 14 - 1) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
