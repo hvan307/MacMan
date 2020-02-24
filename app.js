@@ -56,33 +56,23 @@ function main() {
     if (i === scale1Position) {
       cell.classList.add('scale1')
     }
-    // while (i < walls.length) {
-    //   cell.classList.add('walls')
-    //   i++
-    //   break
-    // } 
-    if (i === 35) {
+    while (i !== 0 && i < width - 1 || i !== width * 15 - 1 && i > width * 15 - width) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
+      break
     }
-    if (i === 36) {
+    while (i >= 35 && i <= 36 || i >= 38 && i <= 39 || i === 50 || i === 54 || i >= 65 && i <= 69) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
+      break
+    }
+    while (i === width * 2 || i >= width * 2 + 2 && i <= width * 2 + 3 || i >= width * 3 - 4 && i <= width * 3 - 3 || i === width * 3 - 1 || i === width * 4 || i >= width * 4 + 2 && i <= width * 4 + 3 || i >= width * 5 - 4 && i <= width * 5 - 3 || i === width * 5 - 1 ) {
+      cell.classList.remove('fries')
+      cell.classList.add('walls')
+      break
     }
     if (i === 37) {
       cell.classList.remove('fries')
-    }
-    if (i === 38) {      
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
-    }
-    if (i === 39) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
-    }
-    if (i === 50) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
     }
     if (i === 51) {
       cell.classList.remove('fries')
@@ -95,30 +85,6 @@ function main() {
     if (i === 53) {
       cell.classList.remove('fries')
       cell.classList.add('scale4')
-    }
-    if (i === 54) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
-    }
-    if (i === 65) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
-    }
-    if (i === 66) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
-    }
-    if (i === 67) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
-    }
-    if (i === 68) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
-    }
-    if (i === 69) {
-      cell.classList.remove('fries')
-      cell.classList.add('walls')
     }
 
     grid.appendChild(cell)
@@ -142,9 +108,11 @@ function main() {
       if (eaterPosition === cells.length - 1) {
         cells[cells.length - 1].classList.remove('eater')
         eaterPosition = (cells.length - 1) - width
-      } if (eaterPosition.contains('wall')) {
-        return
       }
+      // } if (eaterPosition.contains('wall')) {
+      //   return
+      // }
+
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += 1
       cells[eaterPosition].classList.remove('fries')
@@ -162,9 +130,11 @@ function main() {
     } else if (event.key === 'ArrowUp') {
       if (eaterPosition < width) {
         return
-      } if (cells[eaterPosition].contains('wall')) {
-        return 
       }
+      // } if (cells[eaterPosition].contains('wall')) {
+      //   return 
+      // }
+
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= width
       cells[eaterPosition].classList.remove('fries')
@@ -189,7 +159,7 @@ function main() {
   // }
 
 
-  
+
 }
 
 

@@ -33,7 +33,7 @@ body {
 }
 
 .scale1 {
-  background-image: url(images/evil-scale.png);
+  background-image: url(images/kg.png);
   background-size: contain;
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .fries {
-  background-image: url(images/fries-empty-logo.png);
+  background-image: url(images/fries-cartoon.png);
   background-size: contain;
 }
 
