@@ -6,7 +6,7 @@ function main() {
   const cells = []
   const scale1path = []
   const walls = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-  let eaterPosition = 127
+  let eaterPosition = 112
   let scale1Position = 22
 
 
@@ -56,7 +56,7 @@ function main() {
     if (i === scale1Position) {
       cell.classList.add('scale1')
     }
-    while (i !== 0 && i < width - 1 || i !== width * 15 - 1 && i > width * 15 - width) {
+    while (i !== 0 && i < width - 1 || i !== width * 15 - 1 && i !== width * 15 - 2 && i > width * 15 - width + 1) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
       break
@@ -66,7 +66,7 @@ function main() {
       cell.classList.add('walls')
       break
     }
-    while (i === width * 2 || i >= width * 2 + 2 && i <= width * 2 + 3 || i >= width * 3 - 4 && i <= width * 3 - 3 || i === width * 3 - 1 || i === width * 4 || i >= width * 4 + 2 && i <= width * 4 + 3 || i >= width * 5 - 4 && i <= width * 5 - 3 || i === width * 5 - 1 ) {
+    while (i === width * 2 || i >= width * 2 + 2 && i <= width * 2 + 3 || i >= width * 3 - 4 && i <= width * 3 - 3 || i === width * 3 - 1 || i === width * 4 || i >= width * 4 + 2 && i <= width * 4 + 3 || i >= width * 5 - 4 && i <= width * 5 - 3 || i === width * 5 - 1 || i === width * 6 + 1 || i >= width * 6 + 3 && i <= width * 6 + 6 || i >= width * 7 - 7 && i <= width * 7 - 4 || i === width * 7 - 2 || i === width * 7 + 1 || i === width * 8 - 2 || i === width * 8 + 1 || i >= width * 8 + 3 && i <= width * 8 + 6 || i >= width * 9 - 7 && i <= width * 9 - 4 || i === width * 9 - 2 || i === width * 10 || i === width * 11 - 1 || i >= width * 10 + 2 && i <= width * 10 + 3 || i >= width * 10 + 5 && i <= width * 10 + 6 || i >= width * 11 - 7 && i <= width * 11 - 6 || i >= width * 11 - 4 && i <= width * 11 - 3 || i === width * 11 || i >= width * 11 + 2 && i <= width * 11 + 3 || i >= width * 12 - 4 && i <= width * 12 - 3 || i === width * 12 - 1 || i === width * 12 || i >= width * 12 + 2 && i <= width * 12 + 3 || i >= width * 12 + 5 && i <= width * 12 + 6 || i >= width * 13 - 7 && i <= width * 13 - 6 || i >= width * 13 - 4 && i <= width * 13 - 3 || i === width * 13 - 1 || i === width * 13 || i === width * 14 - 1) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
       break
@@ -157,7 +157,9 @@ function main() {
   // function map() {
   //   if (height = 1) 
   // }
+function find() {
 
+}
 
 
 }
