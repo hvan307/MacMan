@@ -11,59 +11,55 @@ function main() {
   let scale1PositionDirection = 'right'
   let scaleMove = 1
   let scale1Path = []
+  let eaterPath = []
+
 
   function coords(input) {
     const eaterX = eaterPosition % width
     const eaterY = (eaterPosition - eaterX) / width
 
-    const ghostX = input % width
-    const ghostY = (input - ghostX) / width
+    const scale1X = input % width
+    const scale1Y = (input - scale1X) / width
 
-    if (ghostX < eaterX) {
+    if (scale1X < eaterX) {
       return 'right'
-    } else if (ghostX > eaterX) {
+    } else if (scale1X > eaterX) {
       return 'left'
-    } else if (ghostY < eaterY) {
+    } else if (scale1Y < eaterY) {
       return 'down'
-    } else if (ghostY > eaterY) {
+    } else if (scale1Y > eaterY) {
       return 'up'
     }
   }
 
-  setInterval(() => {
-    if (scale1PositionDirection === 'right') {
-      if (cells[scale1Position + 1].classList.contains('wall')) {
-        scale1PositionDirection = coords(scale1Position)
-      }
-      scale1Position++
-    } else if (scale1PositionDirection === 'left') {
 
-    }
-  }, 300)
+
+
+
   // COORDINATES
-  let eaterCoordinates = []
-  let scale1Coordinates = []
-  function coordinatesEater() {
-    console.log('eater position:', eaterPosition)
-    const eaterX = (eaterPosition + 1) % width
-    console.log('eater X:', eaterX)
-    const eaterY = ((eaterPosition + 1) - eaterX) / width
-    console.log('eater Y:', eaterY)
-    eaterCoordinates.push(eaterX, eaterY)
-    console.log('eater coordinates:', eaterCoordinates)
-  }
-  coordinatesEater()
+  // let eaterCoordinates = []
+  // let scale1Coordinates = []
+  // function coordinatesEater() {
+  //   console.log('eater position:', eaterPosition)
+  //   const eaterX = (eaterPosition + 1) % width
+  //   console.log('eater X:', eaterX)
+  //   const eaterY = ((eaterPosition + 1) - eaterX) / width
+  //   console.log('eater Y:', eaterY)
+  //   eaterCoordinates.push(eaterX, eaterY)
+  //   console.log('eater coordinates:', eaterCoordinates)
+  // }
+  // coordinatesEater()
 
-  function coordinatesScale1() {
-    console.log('scale1 position:', scale1Position)
-    const scale1X = (scale1Position + 1) % width
-    console.log('scale1 X:', scale1X)
-    const scale1Y = ((scale1Position + 1) - scale1X) / width
-    console.log('scale1 Y:', scale1Y)
-    scale1Coordinates.push(scale1X, scale1Y)
-    console.log('scale1 coordinates:', scale1Coordinates)
-  }
-  coordinatesScale1()
+  // function coordinatesScale1() {
+  //   console.log('scale1 position:', scale1Position)
+  //   const scale1X = (scale1Position + 1) % width
+  //   console.log('scale1 X:', scale1X)
+  //   const scale1Y = ((scale1Position + 1) - scale1X) / width
+  //   console.log('scale1 Y:', scale1Y)
+  //   scale1Coordinates.push(scale1X, scale1Y)
+  //   console.log('scale1 coordinates:', scale1Coordinates)
+  // }
+  // coordinatesScale1()
 
   // const up = scale1Y - width
   // const right = scale1X + 1
@@ -99,23 +95,46 @@ function main() {
     cells[scale1Position].classList.add('scale1')
 
 
+    setInterval(() => {
+      if (scale1PositionDirection === 'right') {
+        if (cells[scale1Position + 1].classList.contains('wall')) {
+          scale1PositionDirection = coords(scale1Position)
+          console.log('i am changing')
+        }
+        scale1Position++
+      } else if (scale1PositionDirection === 'left') {
+        if (cells[scale1Position - 1].classList.contains('wall')) {
+          scale1PositionDirection = coords(scale1Position)
+        }
+        scale1Position--
+      } else if (scale1PositionDirection === 'up') {
+        if (cells[scale1Position - width].classList.contains('wall')) {
+          scale1PositionDirection = coords(scale1Position)
+        }
+        scale1Position--
+      } else if (scale1PositionDirection === 'down') {
+        if (cells[scale1Position + width].classList.contains('wall')) {
+          scale1PositionDirection = coords(scale1Position)
+        }
+        scale1Position++
+      }
+    }, 300)
+
+
+    // if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
+    //   scaleMove = -15
+    // }
+
+    // if (scale1Position === 19 && scaleMove === 1) {
+    //   console.log('I am changing direction')
+    //   scaleMove = 1
+    // }
 
 
 
-    if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
-      scaleMove = -15
-    } 
-    
-    if (scale1Position === 19 && scaleMove === 1) {
-      console.log('I am changing direction')
-      scaleMove = 1
-    }
-
-
-
-    if (scale1Position === 79) {
-      scaleMove = -1
-    }
+    // if (scale1Position === 79) {
+    //   scaleMove = -1
+    // }
 
 
 
@@ -345,9 +364,8 @@ function main() {
     }
   })
 
-  let eaterPath = []
-  eaterPath.push(onkeydown)
-  console.log(eaterPath)
+  // eaterPath.push(onkeydown)
+  // console.log(eaterPath)
 
 
 
