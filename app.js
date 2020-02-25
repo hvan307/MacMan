@@ -77,6 +77,12 @@ function main() {
     if (scale1Position === 0) {
       clearInterval(scale1Interval)
       return
+    // SCALE1 COLLISION WITH EATER 
+    } if (cells[scale1Position + 1].classList.contains('eater') || cells[scale1Position - 1].classList.contains('eater') || cells[scale1Position + width].classList.contains('eater') || cells[scale1Position - width].classList.contains('eater')) {
+      cells[eaterPosition].classList.remove('eater')
+      eaterPosition = 112
+      cells[112].classList.add('eater')
+
     }
     console.log(scale1Position)
 
@@ -114,14 +120,6 @@ function main() {
     if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
       scaleMove = -width
     }
-
-    if (scale1Position === 19 && scaleMove === 1) {
-      console.log('I am changing direction')
-      scaleMove = 1
-    }
-
-
-
     if (scale1Position === 79) {
       scaleMove = -1
     }
