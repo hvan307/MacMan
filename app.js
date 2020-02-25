@@ -78,64 +78,66 @@ function main() {
       clearInterval(scale1Interval)
       return
     }
-    // } if (scale1Position <= 22) {
-    // if (cells[scale1Position + 1].classList.contains('walls')) {
-    //   console.log('wall on the right')
-    //   return
-
-    // }
     console.log(scale1Position)
-
-    // console.log(scale1Path)
-    // console.log(scale1Path[length + 1])
-
 
     cells[scale1Position].classList.remove('scale1')
     scale1Position -= scaleMove
     cells[scale1Position].classList.add('scale1')
 
-
-    setInterval(() => {
-      if (scale1PositionDirection === 'right') {
-        if (cells[scale1Position + 1].classList.contains('wall')) {
-          scale1PositionDirection = coords(scale1Position)
-          console.log('i am changing')
-        }
-        scale1Position++
-      } else if (scale1PositionDirection === 'left') {
-        if (cells[scale1Position - 1].classList.contains('wall')) {
-          scale1PositionDirection = coords(scale1Position)
-        }
-        scale1Position--
-      } else if (scale1PositionDirection === 'up') {
-        if (cells[scale1Position - width].classList.contains('wall')) {
-          scale1PositionDirection = coords(scale1Position)
-        }
-        scale1Position--
-      } else if (scale1PositionDirection === 'down') {
-        if (cells[scale1Position + width].classList.contains('wall')) {
-          scale1PositionDirection = coords(scale1Position)
-        }
-        scale1Position++
-      }
-    }, 300)
-
-
-    // if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
-    //   scaleMove = -15
-    // }
-
-    // if (scale1Position === 19 && scaleMove === 1) {
-    //   console.log('I am changing direction')
-    //   scaleMove = 1
-    // }
+    // COORDS SET INTERVAL 300
+    // setInterval(() => {
+    //   if (scale1PositionDirection === 'right') {
+    //     if (cells[scale1Position + 1].classList.contains('wall')) {
+    //       scale1PositionDirection = coords(scale1Position)
+    //       console.log('i am changing')
+    //     }
+    //     scale1Position++
+    //   } else if (scale1PositionDirection === 'left') {
+    //     if (cells[scale1Position - 1].classList.contains('wall')) {
+    //       scale1PositionDirection = coords(scale1Position)
+    //     }
+    //     scale1Position--
+    //   } else if (scale1PositionDirection === 'up') {
+    //     if (cells[scale1Position - width].classList.contains('wall')) {
+    //       scale1PositionDirection = coords(scale1Position)
+    //     }
+    //     scale1Position--
+    //   } else if (scale1PositionDirection === 'down') {
+    //     if (cells[scale1Position + width].classList.contains('wall')) {
+    //       scale1PositionDirection = coords(scale1Position)
+    //     }
+    //     scale1Position++
+    //   }
+    // }, 300)
 
 
+    if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
+      scaleMove = -width
+    }
 
-    // if (scale1Position === 79) {
-    //   scaleMove = -1
-    // }
+    if (scale1Position === 19 && scaleMove === 1) {
+      console.log('I am changing direction')
+      scaleMove = 1
+    }
 
+
+
+    if (scale1Position === 79) {
+      scaleMove = -1
+    }
+    if (scale1Position === 82) {
+      scaleMove = -15
+    }
+    if (scale1Position === 112) {
+      scaleMove = 1
+    }   if (scale1Position === 106) {
+      scaleMove = width
+    }
+    if (scale1Position === 76) {
+      scaleMove = -1
+    } 
+   
+    
 
 
 
