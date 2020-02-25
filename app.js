@@ -8,53 +8,75 @@ function main() {
   const walls = []
   let eaterPosition = 112
   let scale1Position = 22
-  let ghostMove = 1
+  let scaleMove = 1
 
-// SET INTERVAL SCALE 1
+  // SET INTERVAL SCALE 1
   const scale1Interval = setInterval(() => {
     if (scale1Position === 0) {
       clearInterval(scale1Interval)
       return
-    }
-    cells[scale1Position].classList.remove('scale1')
-    cells[scale1Position].classList.add('fries')
-    scale1Position += ghostMove
-    cells[scale1Position].classList.remove('fries')
-    cells[scale1Position].classList.add('scale1')
-
-
-
-    if (cells[scale1Position - 1].classList.contains('walls')) {
+    } if (scale1Position <= 22) {
       cells[scale1Position].classList.remove('scale1')
-      cells[scale1Position].classList.add('fries')
-      scale1Position += ghostMove
-      cells[scale1Position + 1].classList.remove('fries')
-      cells[scale1Position + 1].classList.add('scale1')
-      console.log('there is a wall behind')
-    } else if (cells[scale1Position + 1].classList.contains('walls')) {
-      cells[scale1Position].classList.remove('scale1')
-      cells[scale1Position].classList.add('fries')
-      scale1Position -= 1
-      cells[scale1Position - 1].classList.remove('fries')
-      cells[scale1Position - 1].classList.add('scale1')
-      console.log('there is a wall ahead')
-    } else if (cells[scale1Position].classList.remove('scale1')) {
-      cells[scale1Position].classList.add('fries')
-      scale1Position -= width
-      cells[scale1Position - width].classList.remove('fries')
-      cells[scale1Position - width].classList.add('scale1')
-      console.log('plain sailing')
-      // } if (cells[scale1Position - width].classList.contains('walls')) {
-      //     
-    } else {
-      // cells[scale1Position].classList.remove('scale1')
-      cells[scale1Position].classList.add('fries')
-      scale1Position += width
-      cells[scale1Position + width].classList.remove('fries')
-      cells[scale1Position + width].classList.add('scale1')
-      console.log('there is a wall behind')
+      // cells[scale1Position].classList.add('fries')
+      scale1Position -= scaleMove
+      cells[scale1Position].classList.remove('fries')
+      cells[scale1Position].classList.add('scale1')
+    
+    } if (cells[scale1Position - 1].classList.contains('walls') || scale1Position === width) {
+      scale1Position += scaleMove
+      scale1Position += scaleMove
+      return
+      // scale1Position += scaleMove + width * 2 + 1
+      
+      console.log('wall on the left')
+    
+    
 
+
+
+    // } else if (cells[scale1Position + 1].classList.contains('walls')) {
+    //   scale1Position -= scaleMove
+    //   console.log('wall on the right')
+    // } else if (cells[scale1Position + width].classList.contains('walls')) {
+    //   scale1Position -= width
+    //   console.log('wall below')
+    // } else { 
+    //   scale1Position += width
+    //   console.log('wall above')
     }
+
+
+    // if (cells[scale1Position - 1].classList.contains('walls')) {
+    //   cells[scale1Position].classList.remove('scale1')
+    //   cells[scale1Position].classList.add('fries')
+    //   scale1Position += scaleMove
+    //   cells[scale1Position + 1].classList.remove('fries')
+    //   cells[scale1Position + 1].classList.add('scale1')
+    //   console.log('there is a wall behind')
+    // } else if (cells[scale1Position + 1].classList.contains('walls')) {
+    //   cells[scale1Position].classList.remove('scale1')
+    //   cells[scale1Position].classList.add('fries')
+    //   scale1Position -= 1
+    //   cells[scale1Position - 1].classList.remove('fries')
+    //   cells[scale1Position - 1].classList.add('scale1')
+    //   console.log('there is a wall ahead')
+    // } else if (cells[scale1Position].classList.remove('scale1')) {
+    //   cells[scale1Position].classList.add('fries')
+    //   scale1Position -= width
+    //   cells[scale1Position - width].classList.remove('fries')
+    //   cells[scale1Position - width].classList.add('scale1')
+    //   console.log('plain sailing')
+    //   // } if (cells[scale1Position - width].classList.contains('walls')) {
+    //   //     
+    // } else {
+    //   // cells[scale1Position].classList.remove('scale1')
+    //   cells[scale1Position].classList.add('fries')
+    //   scale1Position += width
+    //   cells[scale1Position + width].classList.remove('fries')
+    //   cells[scale1Position + width].classList.add('scale1')
+    //   console.log('there is a wall behind')
+
+    // }
 
   }, 500)
 
@@ -115,13 +137,13 @@ function main() {
       cell.classList.add('walls')
       break
     }
-    // SCALE HOUSE WALLS
+    // SCALE HOUSE 
     while (i >= 35 && i <= 36 || i >= 38 && i <= 39 || i === 50 || i === 54 || i >= 65 && i <= 69) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
       break
     }
-    // SCATTERED MAP WALLS
+    // SCATTERED WALLS
     while (i === width * 2 || i >= width * 2 + 2 && i <= width * 2 + 3 || i >= width * 3 - 4 && i <= width * 3 - 3 || i === width * 3 - 1 || i === width * 4 || i >= width * 4 + 2 && i <= width * 4 + 3 || i >= width * 5 - 4 && i <= width * 5 - 3 || i === width * 5 - 1 || i === width * 6 + 1 || i >= width * 6 + 3 && i <= width * 6 + 6 || i >= width * 7 - 7 && i <= width * 7 - 4 || i === width * 7 - 2 || i === width * 7 + 1 || i === width * 8 - 2 || i === width * 8 + 1 || i >= width * 8 + 3 && i <= width * 8 + 6 || i >= width * 9 - 7 && i <= width * 9 - 4 || i === width * 9 - 2 || i === width * 10 || i === width * 11 - 1 || i >= width * 10 + 2 && i <= width * 10 + 3 || i >= width * 10 + 5 && i <= width * 10 + 6 || i >= width * 11 - 7 && i <= width * 11 - 6 || i >= width * 11 - 4 && i <= width * 11 - 3 || i === width * 11 || i >= width * 11 + 2 && i <= width * 11 + 3 || i >= width * 12 - 4 && i <= width * 12 - 3 || i === width * 12 - 1 || i === width * 12 || i >= width * 12 + 2 && i <= width * 12 + 3 || i >= width * 12 + 5 && i <= width * 12 + 6 || i >= width * 13 - 7 && i <= width * 13 - 6 || i >= width * 13 - 4 && i <= width * 13 - 3 || i === width * 13 - 1 || i === width * 13 || i === width * 14 - 1) {
       cell.classList.remove('fries')
       cell.classList.add('walls')
@@ -146,9 +168,11 @@ function main() {
     grid.appendChild(cell)
     cells.push(cell)
   }
-
+  // EVENT LISTENER - KEYS
   document.addEventListener('keydown', (event) => {
+    // RIGHT ARROW
     if (event.key === 'ArrowRight') {
+      // PASSING FROM ONE END TO ANOTHER
       if (eaterPosition === cells.length - 1) {
         cells[cells.length - 1].classList.remove('eater')
         eaterPosition = (cells.length - 1) - width
@@ -163,14 +187,20 @@ function main() {
         eaterPosition -= width
         cells[eaterPosition].classList.add('eater')
       }
+      // CHECKING FOR WALLS AND SCALES
       if (cells[eaterPosition + 1].classList.contains('walls')) {
         return
+      } if (cells[eaterPosition + 1].classList.contains('scale1')) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition = 112 - 1
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += 1
       cells[eaterPosition].classList.remove('fries')
       cells[eaterPosition].classList.add('eater')
+      // LEFT ARROW
     } else if (event.key === 'ArrowLeft') {
+      // PASSING FROM ONE END TO ANOTHER
       if (eaterPosition === 0) {
         cells[eaterPosition].classList.remove('eater')
         eaterPosition = width - 1
@@ -186,29 +216,44 @@ function main() {
         cells[eaterPosition].classList.remove('eater')
         eaterPosition += width
       }
+      // CHECKING FOR WALLS AND SCALE1
       if (cells[eaterPosition - 1].classList.contains('walls')) {
         return
+      } if (cells[eaterPosition - 1].classList.contains('scale1')) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition = 112 + 1
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= 1
       cells[eaterPosition].classList.remove('fries')
       cells[eaterPosition].classList.add('eater')
-
+      // UP ARROW
     } else if (event.key === 'ArrowUp') {
+      // BLOCKING THE BORDER
       if (eaterPosition < width) {
         return
+        // CHECKING FOR WALLS AND SCALE1
       } if (cells[eaterPosition - width].classList.contains('walls')) {
         return
+      } if (cells[eaterPosition - width].classList.contains('scale1')) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition = 112
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= width
       cells[eaterPosition].classList.remove('fries')
       cells[eaterPosition].classList.add('eater')
+      // DOWN ARROW
     } else if (event.key === 'ArrowDown') {
+      // BLOCKING THE BORDER
       if (eaterPosition > cells.length - width - 1) {
         return
+        // CHECKING FOR WALLS AND SCALE1
       } if (cells[eaterPosition + width].classList.contains('walls')) {
         return
+      } if (cells[eaterPosition + width].classList.contains('scale1')) {
+        cells[eaterPosition].classList.remove('eater')
+        eaterPosition = 112
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += width
