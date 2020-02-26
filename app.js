@@ -4,7 +4,7 @@ function main() {
   const gridCellCount = height * width
   const grid = document.querySelector('.grid')
   const cells = []
-  const scale1Zone = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112]
+  const junctions = [16, 19, 25, 28, 46, 49, 55, 58, 76, 79, 82, 85, 88, 106, 112, 118, 136, 139, 142, 145, 148, 169, 172, 175, 196, 199, 202,205, 208]
   const walls = []
   let eaterPosition = 112
   let scale1Position = 22
@@ -13,14 +13,14 @@ function main() {
   let scale1Path = []
   let eaterPath = []
   const direction = ['up', 'right', 'down', 'left']
-  const up = scale1Position - width
-  const down = scale1Position + width
-  const right = scale1Position++
-  const left = scale1Position--
-  const topLeftCorner = document.querySelector('.wallTopLeftCorner')
-  const topRightCorner = document.querySelector('.wallTopRightCorner')
-  const bottomLeftCorner = document.querySelector('.wallBottomLeftCorner')
-  const bottomRightCorner = document.querySelector('.wallBottomRightCorner')
+  // const up = scale1Position - width
+  // const down = scale1Position + width
+  // const right = scale1Position++
+  // const left = scale1Position--
+  // const topLeftCorner = document.querySelector('.wallTopLeftCorner')
+  // const topRightCorner = document.querySelector('.wallTopRightCorner')
+  // const bottomLeftCorner = document.querySelector('.wallBottomLeftCorner')
+  // const bottomRightCorner = document.querySelector('.wallBottomRightCorner')
 
 
 
@@ -45,111 +45,141 @@ function main() {
   }
 
   // SET INTERVAL SCALE 1
-  const scale1Interval = setInterval(() => {
-    if (scale1Position === 0) {
-      clearInterval(scale1Interval)
-      return
-    }
-    // SCALE1 COLLISION WITH EATER 
-    // if (cells[scale1Position + 1].classList.contains('eater') || cells[scale1Position - 1].classList.contains('eater') || cells[scale1Position + width].classList.contains('eater') || cells[scale1Position - width].classList.contains('eater')) {
-    //   cells[eaterPosition].classList.remove('eater')
-    //   eaterPosition = 112
-    //   cells[112].classList.add('eater')
-    // }
-    console.log(scale1Position)
-
-    cells[scale1Position].classList.remove('scale1')
-    // // cells[scale1Position].classList.add('fries')
-    // scale1Position -= scaleMove
-    // // cells[scale1Position].classList.remove('fries')
-    cells[scale1Position].classList.add('scale1')
-
-   
-    function randomDirection() {
-      const random = Math.floor(Math.random() * direction.length)
-      // console.log(random) 
-      // console.log(direction[random])
-      return direction[random]
-    }
-    randomDirection()
-    
-    
-
-    let currentDirection = left
-
-    function scale1Move() {
-      let newDirection = randomDirection()
-      if ((currentDirection === left || currentDirection === right) && (cells[scale1Position + 1].classList.contains('path') || cells[scale1Position + 1].classList.contains('empty') || cells[scale1Position + 1].classList.contains('fries') || cells[scale1Position - 1].classList.contains('path') || cells[scale1Position - 1].classList.contains('empty') || cells[scale1Position - 1].classList.contains('fries'))
-        ||
-        ((currentDirection === up || currentDirection === down) && (cells[scale1Position + width].classList.contains('path') || cells[scale1Position + width].classList.contains('fries') || cells[scale1Position - width].classList.contains('path') || cells[scale1Position - width].classList.contains('empty') || cells[scale1Position - 1].classList.contains('walls')))) {
-        while (newDirection === currentDirection) {
-          newDirection = randomDirection()
-        }
-        currentDirection = newDirection
-      }
-      if (currentDirection === up && (cells[scale1Position - 1].classList.contains('path') || cells[scale1Position - 1].classList.contains('empty') || cells[scale1Position - 1].classList.contains('fries'))) {
-        scale1Position--
-      } else if (currentDirection === right && (cells[scale1Position + 1].classList.contains('path') || cells[scale1Position + 1].classList.contains('empty') || cells[scale1Position + 1].classList.contains('fries'))) {
-        scale1Position++
-      } else if (currentDirection === down && (cells[scale1Position + width].classList.contains('path') || cells[scale1Position + width].classList.contains('empty') || cells[scale1Position + width].classList.contains('fries'))) {
-        scale1Position++
-      } else if (currentDirection === up && (cells[scale1Position - width].classList.contains('path') || cells[scale1Position - width].classList.contains('empty') || cells[scale1Position - width].classList.contains('fries'))) {
-        scale1Position--
-      }
-    }
-  }, 500)
-
-  // COORDS SET INTERVAL 300
-  // setInterval(() => {
-  //   if (scale1PositionDirection === 'right') {
-  //     if (cells[scale1Position + 1].classList.contains('wall')) {
-  //       scale1PositionDirection = coords(scale1Position)
-  //       console.log('i am changing')
-  //     }
-  //     scale1Position++
-  //   } else if (scale1PositionDirection === 'left') {
-  //     if (cells[scale1Position - 1].classList.contains('wall')) {
-  //       scale1PositionDirection = coords(scale1Position)
-  //     }
-  //     scale1Position--
-  //   } else if (scale1PositionDirection === 'up') {
-  //     if (cells[scale1Position - width].classList.contains('wall')) {
-  //       scale1PositionDirection = coords(scale1Position)
-  //     }
-  //     scale1Position--
-  //   } else if (scale1PositionDirection === 'down') {
-  //     if (cells[scale1Position + width].classList.contains('wall')) {
-  //       scale1PositionDirection = coords(scale1Position)
-  //     }
-  //     scale1Position++
+  // const scale1Interval = setInterval(() => {
+  //   if (scale1Position === 0) {
+  //     clearInterval(scale1Interval)
+  //     return
   //   }
-  // }, 300)
+  // SCALE1 COLLISION WITH EATER 
+  // if (cells[scale1Position + 1].classList.contains('eater') || cells[scale1Position - 1].classList.contains('eater') || cells[scale1Position + width].classList.contains('eater') || cells[scale1Position - width].classList.contains('eater')) {
+  //   cells[eaterPosition].classList.remove('eater')
+  //   eaterPosition = 112
+  //   cells[112].classList.add('eater')
+  // }
+  console.log(scale1Position)
+
+  // cells[scale1Position].classList.remove('scale1')
+  // // cells[scale1Position].classList.add('fries')
+  // scale1Position -= scaleMove
+  // // cells[scale1Position].classList.remove('fries')
+  // cells[scale1Position].classList.add('scale1')
+
+
+  function randomDirection() {
+    const random = Math.floor(Math.random() * direction.length)
+    // console.log(random) 
+    // console.log(direction[random])
+    return direction[random]
+  }
+  // randomDirection()
+
+
+
+
+  //   let currentDirection = left
+
+  //   function scale1Move() {
+  //     let newDirection = randomDirection()
+  //     if ((currentDirection === left || currentDirection === right) && (cells[scale1Position + 1].classList.contains('path') || cells[scale1Position + 1].classList.contains('empty') || cells[scale1Position + 1].classList.contains('fries') || cells[scale1Position - 1].classList.contains('path') || cells[scale1Position - 1].classList.contains('empty') || cells[scale1Position - 1].classList.contains('fries'))
+  //       ||
+  //       ((currentDirection === up || currentDirection === down) && (cells[scale1Position + width].classList.contains('path') || cells[scale1Position + width].classList.contains('fries') || cells[scale1Position - width].classList.contains('path') || cells[scale1Position - width].classList.contains('empty') || cells[scale1Position - 1].classList.contains('walls')))) {
+  //       while (newDirection === currentDirection) {
+  //         console.log(newDirection, currentDirection)
+  //         newDirection = randomDirection()
+  //       }
+  //       currentDirection = newDirection
+  //     }
+  //     if (currentDirection === left && (cells[scale1Position - 1].classList.contains('path') || cells[scale1Position - 1].classList.contains('empty') || cells[scale1Position - 1].classList.contains('fries'))) {
+  //       scale1Position--
+  //     } else if (currentDirection === right && (cells[scale1Position + 1].classList.contains('path') || cells[scale1Position + 1].classList.contains('empty') || cells[scale1Position + 1].classList.contains('fries'))) {
+  //       scale1Position++
+  //     } else if (currentDirection === down && (cells[scale1Position + width].classList.contains('path') || cells[scale1Position + width].classList.contains('empty') || cells[scale1Position + width].classList.contains('fries'))) {
+  //       scale1Position++
+  //     } else if (currentDirection === up && (cells[scale1Position - width].classList.contains('path') || cells[scale1Position - width].classList.contains('empty') || cells[scale1Position - width].classList.contains('fries'))) {
+  //       scale1Position--
+  //     }
+  //   }
+
+  //   scale1Move()
+  // }, 500)
+
+  // SCALE1 SETINTERVAL 300
+  function scale1Chase() {
+    setInterval(() => {
+      if (scale1PositionDirection === 'right') {
+        if (junctions.includes('cells[scale1Position]')) {
+          scale1PositionDirection = randomDirection()
+        } else if (cells[scale1Position + 1].classList.contains('walls')) {
+          scale1PositionDirection = randomDirection()
+          return
+        } else {
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position++
+          cells[scale1Position].classList.add('scale1')
+        }
+      } else if (scale1PositionDirection === 'left') {
+        if (junctions.includes(cells[scale1Position])) {
+          scale1PositionDirection = randomDirection()
+        } else if (cells[scale1Position - 1].classList.contains('walls')) {
+          scale1PositionDirection = randomDirection()
+          return
+        } else {
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position--
+          cells[scale1Position].classList.add('scale1')
+        }
+      } else if (scale1PositionDirection === 'up') {
+        if (junctions.includes(cells[scale1Position])) {
+          scale1PositionDirection = randomDirection()
+        } else if (cells[scale1Position - width].classList.contains('walls')) {
+          scale1PositionDirection = randomDirection()
+          return
+        } else {
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position -= width
+          cells[scale1Position].classList.add('scale1')
+        }
+      } else if (scale1PositionDirection === 'down') {
+        if (junctions.includes(cells[scale1Position])) {
+          scale1PositionDirection = randomDirection()
+        } else if (cells[scale1Position + width].classList.contains('walls')) {
+          scale1PositionDirection = randomDirection()
+          return
+        } else {
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position += width
+          cells[scale1Position].classList.add('scale1')
+        }
+      }
+    }, 300)
+  }
+  scale1Chase()
+
 
   // FIXED PATH
-  // if (eaterPosition <= scale1Zone) {
-  //   return coords
-  // }
-  // if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
-  //   scaleMove = -width
-  // }
-  // if (scale1Position === 79) {
-  //   scaleMove = -1
-  // }
-  // if (scale1Position === 82) {
-  //   scaleMove = -15
-  // }
-  // if (scale1Position === 112) {
-  //   scaleMove = 1
-  // }   
-  // if (scale1Position === 106) {
-  //   scaleMove = width
-  // }
-  // if (scale1Position === 76) {
-  //   scaleMove = -1
-  // } 
+  //   if (eaterPosition <= scale1Zone) {
+  //     return coords
+  //   }
+  //   if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
+  //     scaleMove = -width
+  //   }
+  //   if (scale1Position === 79) {
+  //     scaleMove = -1
+  //   }
+  //   if (scale1Position === 82) {
+  //     scaleMove = -15
+  //   }
+  //   if (scale1Position === 112) {
+  //     scaleMove = 1
+  //   }
+  //   if (scale1Position === 106) {
+  //     scaleMove = width
+  //   }
+  //   if (scale1Position === 76) {
+  //     scaleMove = -1
+  //   }
 
-
-
+  // }, 500)
 
 
 
@@ -169,7 +199,7 @@ function main() {
   // else if ()
   // scale1Position += scaleMove + width * 2 + 1
   // || cells[scale1Position - 1].classList.contains('walls') || cells[scale1Position + width].classList.contains('walls') || cells[scale1Position - width].classList.contains('walls')) {
-  //   console.log('There is a right wall'
+  //   console.log('There is a right wall')
 
 
   // } else if (cells[scale1Position + 1].classList.contains('walls')) {
@@ -273,8 +303,8 @@ function main() {
   //   }
   // }
   // drawMap()
-  // DRAWING A GRID 
 
+  // DRAWING A GRID 
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
     cell.classList.add('cell')
@@ -327,11 +357,17 @@ function main() {
       cell.classList.remove('fries')
       cell.classList.add('scale4')
     }
+    if (i === eaterPosition) {
+      cell.classList.remove('fries')
+      cell.classList.add('eater')
+    }
+    if (i === scale1Position) {
+      cell.classList.remove('fries')
+      cell.classList.add('scale1')
+    }
     grid.appendChild(cell)
     cells.push(cell)
   }
-
-
   // EVENT LISTENER - KEYS
   document.addEventListener('keydown', (event) => {
     // RIGHT ARROW
@@ -425,11 +461,6 @@ function main() {
       cells[eaterPosition].classList.add('eater')
     }
   })
-
-  // eaterPath.push(onkeydown)
-  // console.log(eaterPath)
-
-
 
 }
 
