@@ -62,7 +62,11 @@ body {
   background-size: contain;
 }
 
-.walls {
+.walls,
+.wallTopLeftCorner,
+.wallTopRightCorner,
+.wallBottomLeftCorner,
+.wallBottomRightCorner {
   background-image: url(images/walls.png);
   background-size: contain;
 }

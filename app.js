@@ -4,7 +4,7 @@ function main() {
   const gridCellCount = height * width
   const grid = document.querySelector('.grid')
   const cells = []
-  const scale1zone = []
+  const scale1Zone = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112]
   const walls = []
   let eaterPosition = 112
   let scale1Position = 22
@@ -12,6 +12,18 @@ function main() {
   let scaleMove = 1
   let scale1Path = []
   let eaterPath = []
+  const direction = ['up', 'right', 'down', 'left']
+  const up = scale1Position - width
+  const down = scale1Position + width
+  const right = scale1Position++
+  const left = scale1Position--
+  const topLeftCorner = document.querySelector('.wallTopLeftCorner')
+  const topRightCorner = document.querySelector('.wallTopRightCorner')
+  const bottomLeftCorner = document.querySelector('.wallBottomLeftCorner')
+  const bottomRightCorner = document.querySelector('.wallBottomRightCorner')
+
+
+
 
 
   function coords(input) {
@@ -32,212 +44,261 @@ function main() {
     }
   }
 
-
-
-
-
-  // COORDINATES
-  // let eaterCoordinates = []
-  // let scale1Coordinates = []
-  // function coordinatesEater() {
-  //   console.log('eater position:', eaterPosition)
-  //   const eaterX = (eaterPosition + 1) % width
-  //   console.log('eater X:', eaterX)
-  //   const eaterY = ((eaterPosition + 1) - eaterX) / width
-  //   console.log('eater Y:', eaterY)
-  //   eaterCoordinates.push(eaterX, eaterY)
-  //   console.log('eater coordinates:', eaterCoordinates)
-  // }
-  // coordinatesEater()
-
-  // function coordinatesScale1() {
-  //   console.log('scale1 position:', scale1Position)
-  //   const scale1X = (scale1Position + 1) % width
-  //   console.log('scale1 X:', scale1X)
-  //   const scale1Y = ((scale1Position + 1) - scale1X) / width
-  //   console.log('scale1 Y:', scale1Y)
-  //   scale1Coordinates.push(scale1X, scale1Y)
-  //   console.log('scale1 coordinates:', scale1Coordinates)
-  // }
-  // coordinatesScale1()
-
-  // const up = scale1Y - width
-  // const right = scale1X + 1
-  // const down = scale1Y + width
-  // const left = scale1X - 1
-  // const direction = [up, right, down, left]
-  // SCALE 1 
-  // const randomDirection = direction[Math.floor(Math.random() * direction.length)]
-  // const moves = (!cells.contains.classList('eater') || !cells.contains.classList('scale1')) ?
-  //   [up, down] : [left, right]
-  // console.log(randomDirection)
-
   // SET INTERVAL SCALE 1
   const scale1Interval = setInterval(() => {
     if (scale1Position === 0) {
       clearInterval(scale1Interval)
       return
-    // SCALE1 COLLISION WITH EATER 
-    } if (cells[scale1Position + 1].classList.contains('eater') || cells[scale1Position - 1].classList.contains('eater') || cells[scale1Position + width].classList.contains('eater') || cells[scale1Position - width].classList.contains('eater')) {
-      cells[eaterPosition].classList.remove('eater')
-      eaterPosition = 112
-      cells[112].classList.add('eater')
-
     }
+    // SCALE1 COLLISION WITH EATER 
+    // if (cells[scale1Position + 1].classList.contains('eater') || cells[scale1Position - 1].classList.contains('eater') || cells[scale1Position + width].classList.contains('eater') || cells[scale1Position - width].classList.contains('eater')) {
+    //   cells[eaterPosition].classList.remove('eater')
+    //   eaterPosition = 112
+    //   cells[112].classList.add('eater')
+    // }
     console.log(scale1Position)
 
     cells[scale1Position].classList.remove('scale1')
-    scale1Position -= scaleMove
+    // // cells[scale1Position].classList.add('fries')
+    // scale1Position -= scaleMove
+    // // cells[scale1Position].classList.remove('fries')
     cells[scale1Position].classList.add('scale1')
 
-    // COORDS SET INTERVAL 300
-    // setInterval(() => {
-    //   if (scale1PositionDirection === 'right') {
-    //     if (cells[scale1Position + 1].classList.contains('wall')) {
-    //       scale1PositionDirection = coords(scale1Position)
-    //       console.log('i am changing')
-    //     }
-    //     scale1Position++
-    //   } else if (scale1PositionDirection === 'left') {
-    //     if (cells[scale1Position - 1].classList.contains('wall')) {
-    //       scale1PositionDirection = coords(scale1Position)
-    //     }
-    //     scale1Position--
-    //   } else if (scale1PositionDirection === 'up') {
-    //     if (cells[scale1Position - width].classList.contains('wall')) {
-    //       scale1PositionDirection = coords(scale1Position)
-    //     }
-    //     scale1Position--
-    //   } else if (scale1PositionDirection === 'down') {
-    //     if (cells[scale1Position + width].classList.contains('wall')) {
-    //       scale1PositionDirection = coords(scale1Position)
-    //     }
-    //     scale1Position++
-    //   }
-    // }, 300)
-
-
-    if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
-      scaleMove = -width
-    }
-    if (scale1Position === 79) {
-      scaleMove = -1
-    }
-    if (scale1Position === 82) {
-      scaleMove = -15
-    }
-    if (scale1Position === 112) {
-      scaleMove = 1
-    }   if (scale1Position === 106) {
-      scaleMove = width
-    }
-    if (scale1Position === 76) {
-      scaleMove = -1
-    } 
    
+    function randomDirection() {
+      const random = Math.floor(Math.random() * direction.length)
+      // console.log(random) 
+      // console.log(direction[random])
+      return direction[random]
+    }
+    randomDirection()
+    
     
 
+    let currentDirection = left
+
+    function scale1Move() {
+      let newDirection = randomDirection()
+      if ((currentDirection === left || currentDirection === right) && (cells[scale1Position + 1].classList.contains('path') || cells[scale1Position + 1].classList.contains('empty') || cells[scale1Position + 1].classList.contains('fries') || cells[scale1Position - 1].classList.contains('path') || cells[scale1Position - 1].classList.contains('empty') || cells[scale1Position - 1].classList.contains('fries'))
+        ||
+        ((currentDirection === up || currentDirection === down) && (cells[scale1Position + width].classList.contains('path') || cells[scale1Position + width].classList.contains('fries') || cells[scale1Position - width].classList.contains('path') || cells[scale1Position - width].classList.contains('empty') || cells[scale1Position - 1].classList.contains('walls')))) {
+        while (newDirection === currentDirection) {
+          newDirection = randomDirection()
+        }
+        currentDirection = newDirection
+      }
+      if (currentDirection === up && (cells[scale1Position - 1].classList.contains('path') || cells[scale1Position - 1].classList.contains('empty') || cells[scale1Position - 1].classList.contains('fries'))) {
+        scale1Position--
+      } else if (currentDirection === right && (cells[scale1Position + 1].classList.contains('path') || cells[scale1Position + 1].classList.contains('empty') || cells[scale1Position + 1].classList.contains('fries'))) {
+        scale1Position++
+      } else if (currentDirection === down && (cells[scale1Position + width].classList.contains('path') || cells[scale1Position + width].classList.contains('empty') || cells[scale1Position + width].classList.contains('fries'))) {
+        scale1Position++
+      } else if (currentDirection === up && (cells[scale1Position - width].classList.contains('path') || cells[scale1Position - width].classList.contains('empty') || cells[scale1Position - width].classList.contains('fries'))) {
+        scale1Position--
+      }
+    }
+  }, 500)
+
+  // COORDS SET INTERVAL 300
+  // setInterval(() => {
+  //   if (scale1PositionDirection === 'right') {
+  //     if (cells[scale1Position + 1].classList.contains('wall')) {
+  //       scale1PositionDirection = coords(scale1Position)
+  //       console.log('i am changing')
+  //     }
+  //     scale1Position++
+  //   } else if (scale1PositionDirection === 'left') {
+  //     if (cells[scale1Position - 1].classList.contains('wall')) {
+  //       scale1PositionDirection = coords(scale1Position)
+  //     }
+  //     scale1Position--
+  //   } else if (scale1PositionDirection === 'up') {
+  //     if (cells[scale1Position - width].classList.contains('wall')) {
+  //       scale1PositionDirection = coords(scale1Position)
+  //     }
+  //     scale1Position--
+  //   } else if (scale1PositionDirection === 'down') {
+  //     if (cells[scale1Position + width].classList.contains('wall')) {
+  //       scale1PositionDirection = coords(scale1Position)
+  //     }
+  //     scale1Position++
+  //   }
+  // }, 300)
+
+  // FIXED PATH
+  // if (eaterPosition <= scale1Zone) {
+  //   return coords
+  // }
+  // if (scale1Position === 19 && cells[scale1Position].classList.contains('path')) {
+  //   scaleMove = -width
+  // }
+  // if (scale1Position === 79) {
+  //   scaleMove = -1
+  // }
+  // if (scale1Position === 82) {
+  //   scaleMove = -15
+  // }
+  // if (scale1Position === 112) {
+  //   scaleMove = 1
+  // }   
+  // if (scale1Position === 106) {
+  //   scaleMove = width
+  // }
+  // if (scale1Position === 76) {
+  //   scaleMove = -1
+  // } 
 
 
-    // cells[scale1Position].classList.add('fries')
-
-    // if (cells[scale1Position - 1].classList.contains('walls') || scale1Position === width) {
-    //   cells[scale1Position].classList.add('scale1')
-    //   return
-    // }
-    // } if (scale1Position === scale1Path[length + 1]) {
-    //   scale1Position += scaleMove + width
-    // }
-
-    // scale1Position -= scaleMove
-    // scale1Path.push(scale1Position)
-
-
-    // console.log(scale1Path)
-    // cells[scale1Position].classList.remove('fries')
-    // cells[scale1Position].classList.add('scale1')
-
-
-
-    // else if ()
-    // scale1Position += scaleMove + width * 2 + 1
-    // || cells[scale1Position - 1].classList.contains('walls') || cells[scale1Position + width].classList.contains('walls') || cells[scale1Position - width].classList.contains('walls')) {
-    //   console.log('There is a right wall'
 
 
 
 
+  // cells[scale1Position].classList.add('fries')
+
+  // if (cells[scale1Position - 1].classList.contains('walls') || scale1Position === width) {
+  //   cells[scale1Position].classList.add('scale1')
+  //   return
+  // }
+  // } if (scale1Position === scale1Path[length + 1]) {
+  //   scale1Position += scaleMove + width
+  // }
+
+  // scale1Position -= scaleMove
+  // scale1Path.push(scale1Position)
+
+  // else if ()
+  // scale1Position += scaleMove + width * 2 + 1
+  // || cells[scale1Position - 1].classList.contains('walls') || cells[scale1Position + width].classList.contains('walls') || cells[scale1Position - width].classList.contains('walls')) {
+  //   console.log('There is a right wall'
 
 
-    // } else if (cells[scale1Position + 1].classList.contains('walls')) {
-    //   scale1Position -= scaleMove
-    //   console.log('wall on the right')
-    // } else if (cells[scale1Position + width].classList.contains('walls')) {
-    //   scale1Position -= width
-    //   console.log('wall below')
-    // } else { 
-    //   scale1Position += width
-    //   console.log('wall above')
-    // }
+  // } else if (cells[scale1Position + 1].classList.contains('walls')) {
+  //   scale1Position -= scaleMove
+  //   console.log('wall on the right')
+  // } else if (cells[scale1Position + width].classList.contains('walls')) {
+  //   scale1Position -= width
+  //   console.log('wall below')
+  // } else { 
+  //   scale1Position += width
+  //   console.log('wall above')
+  // }
 
 
-    // if (cells[scale1Position - 1].classList.contains('walls')) {
-    //   cells[scale1Position].classList.remove('scale1')
-    //   cells[scale1Position].classList.add('fries')
-    //   scale1Position += scaleMove
-    //   cells[scale1Position + 1].classList.remove('fries')
-    //   cells[scale1Position + 1].classList.add('scale1')
-    //   console.log('there is a wall behind')
-    // } else if (cells[scale1Position + 1].classList.contains('walls')) {
-    //   cells[scale1Position].classList.remove('scale1')
-    //   cells[scale1Position].classList.add('fries')
-    //   scale1Position -= 1
-    //   cells[scale1Position - 1].classList.remove('fries')
-    //   cells[scale1Position - 1].classList.add('scale1')
-    //   console.log('there is a wall ahead')
-    // } else if (cells[scale1Position].classList.remove('scale1')) {
-    //   cells[scale1Position].classList.add('fries')
-    //   scale1Position -= width
-    //   cells[scale1Position - width].classList.remove('fries')
-    //   cells[scale1Position - width].classList.add('scale1')
-    //   console.log('plain sailing')
-    //   // } if (cells[scale1Position - width].classList.contains('walls')) {
-    //   //     
-    // } else {
-    //   // cells[scale1Position].classList.remove('scale1')
-    //   cells[scale1Position].classList.add('fries')
-    //   scale1Position += width
-    //   cells[scale1Position + width].classList.remove('fries')
-    //   cells[scale1Position + width].classList.add('scale1')
-    //   console.log('there is a wall behind')
+  // if (cells[scale1Position - 1].classList.contains('walls')) {
+  //   cells[scale1Position].classList.remove('scale1')
+  //   cells[scale1Position].classList.add('fries')
+  //   scale1Position += scaleMove
+  //   cells[scale1Position + 1].classList.remove('fries')
+  //   cells[scale1Position + 1].classList.add('scale1')
+  //   console.log('there is a wall behind')
+  // } else if (cells[scale1Position + 1].classList.contains('walls')) {
+  //   cells[scale1Position].classList.remove('scale1')
+  //   cells[scale1Position].classList.add('fries')
+  //   scale1Position -= 1
+  //   cells[scale1Position - 1].classList.remove('fries')
+  //   cells[scale1Position - 1].classList.add('scale1')
+  //   console.log('there is a wall ahead')
+  // } else if (cells[scale1Position].classList.remove('scale1')) {
+  //   cells[scale1Position].classList.add('fries')
+  //   scale1Position -= width
+  //   cells[scale1Position - width].classList.remove('fries')
+  //   cells[scale1Position - width].classList.add('scale1')
+  //   console.log('plain sailing')
+  //   // } if (cells[scale1Position - width].classList.contains('walls')) {
+  //   //     
+  // } else {
+  //   // cells[scale1Position].classList.remove('scale1')
+  //   cells[scale1Position].classList.add('fries')
+  //   scale1Position += width
+  //   cells[scale1Position + width].classList.remove('fries')
+  //   cells[scale1Position + width].classList.add('scale1')
+  //   console.log('there is a wall behind')
 
-    // }
+  // }
 
-  }, 1000)
+  // }, 500)
 
-
+  // MAP LAYOUT
+  // const map = [
+  //   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
+  //   [0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0],
+  //   [0, 5, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
+  //   [0, 5, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
+  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
+  //   [0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0],
+  //   [0, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 0],
+  //   [0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0],
+  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
+  //   [0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0],
+  //   [0, 5, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 5, 0],
+  //   [0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0],
+  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
+  //   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]
+  // ]
 
   // DRAWING A GRID 
+  // function drawMap() {
+  //   for (let i = 0; i < gridCellCount; i++) {
+  //     const cell = document.createElement('div')
+  //     cell.classList.add('cell')
+  //     for (let j = 0; j < map.length; j++) {
+  //       if (map[i] && map[j] === 0) {
+  //         cell.classList.add('walls')
+  //       } else if (map[i, j] === 1) {
+  //         cell.classList.add('wallTopLeftCorner')
+  //       } else if (map[i, j] === 2) {
+  //         cell.classList.add('wallTopRightCorner')
+  //       } else if (map[i, j] === 3) {
+  //         cell.classList.add('wallBottomRightCorner')
+  //       } else if (map[i, j] === 4) {
+  //         cell.classList.add('wallBottomLeftCorner')
+  //       } else if (map[i, j] === 5) {
+  //         cell.classList.add('fries')
+  //         cell.classList.add('path')
+  //       } else if (map[i, j] === 6) {
+  //         cell.classList.add('empty')
+  //       }
+  //     }
+  //     if (i === eaterPosition) {
+  //       cell.classList.remove('fries')
+  //       cell.classList.add('eater')
+  //     }
+  //     if (i === scale1Position) {
+  //       cell.classList.remove('fries')
+  //       cell.classList.add('scale1')
+  //     }
+  //     grid.appendChild(cell)
+  //     cells.push(cell)
+  //   }
+  // }
+  // drawMap()
+  // DRAWING A GRID 
+
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
     cell.classList.add('cell')
-    cell.classList.add('path')
-    // cell.classList.add('fries')
 
-    if (i === eaterPosition) {
-      cell.classList.remove('fries')
-      cell.classList.add('eater')
-    }
-    if (i === scale1Position) {
-      cell.classList.remove('fries')
-      cell.classList.add('scale1')
-    }
-    // BORDER WALLS
+
+    // // BORDER WALLS
     while (i <= width - 1 || i === width || i === width * 2 - 1 || i === width * 3 || i === width * 4 - 1 || i === width * 5 || i === width * 6 - 1 || i === width * 6 || i === width * 7 - 1 || i === width * 7 || i === width * 8 - 1 || i === width * 8 || i === width * 9 - 1 || i === width * 9 || i === width * 10 - 1 || i >= width * 14) {
       cell.classList.remove('fries')
       cell.classList.remove('path')
       cell.classList.add('walls')
       break
+    }
+    // CORNERS OF THE MAP
+    if (i === 0) {
+      cell.classList.add('wallTopLeftCorner')
+    }
+    if (i === width - 1) {
+      cell.classList.add('wallTopRightCorner')
+    }
+    if (i === width * 14) {
+      cell.classList.add('wallBottomLeftCorner')
+    }
+    if (i === width * height - 1) {
+      cell.classList.add('wallBottomRightsCorner')
     }
     // SCALE HOUSE 
     while (i >= 35 && i <= 36 || i >= 38 && i <= 39 || i === 50 || i === 54 || i >= 65 && i <= 69) {
@@ -266,10 +327,11 @@ function main() {
       cell.classList.remove('fries')
       cell.classList.add('scale4')
     }
-
     grid.appendChild(cell)
     cells.push(cell)
   }
+
+
   // EVENT LISTENER - KEYS
   document.addEventListener('keydown', (event) => {
     // RIGHT ARROW
@@ -370,6 +432,5 @@ function main() {
 
 
 }
-
 
 window.addEventListener('DOMContentLoaded', main)
