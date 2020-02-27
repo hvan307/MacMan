@@ -10,7 +10,7 @@ function main() {
   let scale1Position = 16
   let scale1PositionDirection = 'right'
   let scale2Position = 28
-  let scale2PositionDirection = 'right'
+  let scale2PositionDirection = 'left'
   let scale3Position = 196
   let scale3PositionDirection = 'right'
   let scale4Position = 208
@@ -27,11 +27,6 @@ function main() {
   const directionButRightUp = ['left', 'down']
   const directionButRightDown = ['left', 'up']
   const directionButUpDown = ['right', 'left']
-  // DIRECTIONS
-  // const up = scale1Position - width
-  // const down = scale1Position + width
-  // const right = scale1Position + 1
-  // const left = scale1Position - 1
 
   // COORDINATES FOR CHASING PACMAN
   function coords(input) {
@@ -51,7 +46,6 @@ function main() {
       return 'up'
     }
   }
-  console.log(scale1Position)
 
   // FUNCTIONS FOR RANDOM DIRECTIONS
   function randomDirection() {
@@ -106,9 +100,17 @@ function main() {
   // SCALE1 MOVEMENTS
   function scale1Chase() {
     setInterval(() => {
-      console.log(scale1PositionDirection)
+      // When Scale1 catches Eater
+      if (scale1Position === eaterPosition) {
+        cells[eaterPosition].classList.remove('eater')
+        setTimeout(() => {
+          eaterPosition = 112
+          cells[eaterPosition].classList.add('eater')
+        }, 100)
+      }
       // CURRENT DIRECTION - LEFT
       if (scale1PositionDirection === 'left') {
+        // CHECKS FOR WALL CLASHES
         if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
           scale1PositionDirection = randomButLeftUp()
           return
@@ -117,28 +119,23 @@ function main() {
           return
         } else if (cells[scale1Position - 1].classList.contains('walls')) {
           scale1PositionDirection = randomButLeft()
-
           return
         } else if (cells[scale1Position - width].classList.contains('walls') && !cells[scale1Position - 1].classList.contains('walls')) {
           scale1PositionDirection = randomButRightUp()
           if (scale1PositionDirection === 'left') {
             cells[scale1Position].classList.remove('scale1')
-            // cells[scale1Position].classList.add('food')
             scale1Position--
-            // cells[scale1Position].classList.remove('food')
             cells[scale1Position].classList.add('scale1')
             return
           }
           return
         }
         cells[scale1Position].classList.remove('scale1')
-        // cells[scale1Position].classList.add('food')
         scale1Position--
-        // cells[scale1Position].classList.remove('food')
         cells[scale1Position].classList.add('scale1')
-      } else if (scale1PositionDirection === 'right') {
         // CURRENT DIRECTION - RIGHT
-
+      } else if (scale1PositionDirection === 'right') {
+        // CHECKS FOR WALL CLASHES
         if (cells[scale1Position + 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
           scale1PositionDirection = randomButRightUp()
           return
@@ -151,22 +148,19 @@ function main() {
         } else if (cells[scale1Position - width].classList.contains('walls') && !cells[scale1Position + width].classList.contains('walls')) {
           scale1PositionDirection = randomButLeftUp()
           if (scale1PositionDirection === 'right') {
-            // cells[scale1Position].classList.remove('scale1')
-            cells[scale1Position].classList.add('food')
+            cells[scale1Position].classList.remove('scale1')
             scale1Position++
-            // cells[scale1Position].classList.remove('food')
             cells[scale1Position].classList.add('scale1')
             return
           }
           return
         }
         cells[scale1Position].classList.remove('scale1')
-        // cells[scale1Position].classList.add('food')
         scale1Position++
-        // cells[scale1Position].classList.remove('food')
         cells[scale1Position].classList.add('scale1')
-      } else if (scale1PositionDirection === 'up') {
         // CURRENT DIRECTION - UP
+      } else if (scale1PositionDirection === 'up') {
+        // CHECKS FOR WALL CLASHES
         if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
           scale1PositionDirection = randomButLeftUp()
           return
@@ -177,9 +171,7 @@ function main() {
           scale1PositionDirection = randomButLeftDown()
           if (scale1PositionDirection === 'up') {
             cells[scale1Position].classList.remove('scale1')
-            // cells[scale1Position].classList.add('food')
             scale1Position -= width
-            // cells[scale1Position].classList.remove('food')
             cells[scale1Position].classList.add('scale1')
             return
           }
@@ -188,9 +180,7 @@ function main() {
           scale1PositionDirection = randomButRightDown()
           if (scale1PositionDirection === 'up') {
             cells[scale1Position].classList.remove('scale1')
-            // cells[scale1Position].classList.add('food')
             scale1Position -= width
-            // cells[scale1Position].classList.remove('food')
             cells[scale1Position].classList.add('scale1')
             return
           }
@@ -201,13 +191,11 @@ function main() {
           return
         }
         cells[scale1Position].classList.remove('scale1')
-        // cells[scale1Position].classList.add('food')
         scale1Position -= width
-        // cells[scale1Position].classList.remove('food')
         cells[scale1Position].classList.add('scale1')
         // CURRENT DIRECTION - DOWN
       } else if (scale1PositionDirection === 'down') {
-
+        // CHECKS FOR WALL CLASHES
         if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position + width].classList.contains('walls')) {
           scale1PositionDirection = randomButLeftDown()
           return
@@ -218,20 +206,16 @@ function main() {
           scale1PositionDirection = randomButLeftUp()
           if (scale1PositionDirection === 'down') {
             cells[scale1Position].classList.remove('scale1')
-            // cells[scale1Position].classList.add('food')
             scale1Position += width
-            // cells[scale1Position].classList.remove('food')
             cells[scale1Position].classList.add('scale1')
             return
           }
-          return 
+          return
         } else if (cells[scale1Position + 1].classList.contains('walls') && !cells[scale1Position - 1].classList.contains('walls')) {
           scale1PositionDirection = randomButRightUp()
           if (scale1PositionDirection === 'down') {
             cells[scale1Position].classList.remove('scale1')
-            // cells[scale1Position].classList.add('food')
             scale1Position += width
-            // cells[scale1Position].classList.remove('food')
             cells[scale1Position].classList.add('scale1')
             return
           }
@@ -241,19 +225,282 @@ function main() {
           return
         }
         cells[scale1Position].classList.remove('scale1')
-        // cells[scale1Position].classList.add('food')
         scale1Position += width
-        // cells[scale1Position].classList.remove('food')
         cells[scale1Position].classList.add('scale1')
-        if (cells[scale1Position + 1] === eaterPosition || cells[scale1Position + width] === eaterPosition) {
-          cells[scale1Position].classList.remove('eater')
-          eaterPosition = 112
-        }
       }
-    }, 300)
+    }, 200)
   }
   scale1Chase()
 
+  // SCALE2 MOVEMENTS
+  function scale2Chase() {
+    setInterval(() => {
+      // When Scale2 catches Eater
+      if (scale2Position === eaterPosition) {
+        cells[eaterPosition].classList.remove('eater')
+        setTimeout(() => {
+          eaterPosition = 112
+          cells[eaterPosition].classList.add('eater')
+        }, 100)
+      }
+      // CURRENT DIRECTION - LEFT
+      if (scale2PositionDirection === 'left') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale2Position - 1].classList.contains('walls') && cells[scale2Position - width].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeftUp()
+          return
+        } else if (cells[scale2Position - 1].classList.contains('walls') && cells[scale2Position + width].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeftDown()
+          return
+        } else if (cells[scale2Position - 1].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeft()
+          return
+        } else if (cells[scale2Position - width].classList.contains('walls') && !cells[scale2Position - 1].classList.contains('walls')) {
+          scale2PositionDirection = randomButRightUp()
+          if (scale2PositionDirection === 'left') {
+            cells[scale2Position].classList.remove('scale2')
+            scale2Position--
+            cells[scale2Position].classList.add('scale2')
+            return
+          }
+          return
+        }
+        cells[scale2Position].classList.remove('scale2')
+        scale2Position--
+        cells[scale2Position].classList.add('scale2')
+        // CURRENT DIRECTION - RIGHT
+      } else if (scale2PositionDirection === 'right') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale2Position + 1].classList.contains('walls') && cells[scale2Position - width].classList.contains('walls')) {
+          scale2PositionDirection = randomButRightUp()
+          return
+        } else if (cells[scale2Position + 1].classList.contains('walls') && cells[scale2Position + width].classList.contains('walls')) {
+          scale2PositionDirection = randomButRightDown()
+          return
+        } else if (cells[scale2Position + 1].classList.contains('walls')) {
+          scale2PositionDirection = randomButRight()
+          return
+        } else if (cells[scale2Position - width].classList.contains('walls') && !cells[scale2Position + width].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeftUp()
+          if (scale2PositionDirection === 'right') {
+            cells[scale2Position].classList.remove('scale2')
+            scale2Position++
+            cells[scale2Position].classList.add('scale2')
+            return
+          }
+          return
+        }
+        cells[scale2Position].classList.remove('scale2')
+        scale2Position++
+        cells[scale2Position].classList.add('scale2')
+        // CURRENT DIRECTION - UP
+      } else if (scale2PositionDirection === 'up') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale2Position - 1].classList.contains('walls') && cells[scale2Position - width].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeftUp()
+          return
+        } else if (cells[scale2Position + 1].classList.contains('walls') && cells[scale2Position - width].classList.contains('walls')) {
+          scale2PositionDirection = randomButRightUp()
+          return
+        } else if (cells[scale2Position - 1].classList.contains('walls') && !cells[scale2Position + 1].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeftDown()
+          if (scale2PositionDirection === 'up') {
+            cells[scale2Position].classList.remove('scale2')
+            scale2Position -= width
+            cells[scale2Position].classList.add('scale2')
+            return
+          }
+          return
+        } else if (cells[scale2Position + 1].classList.contains('walls') && !cells[scale2Position - 1].classList.contains('walls')) {
+          scale2PositionDirection = randomButRightDown()
+          if (scale2PositionDirection === 'up') {
+            cells[scale2Position].classList.remove('scale2')
+            scale2Position -= width
+            cells[scale2Position].classList.add('scale2')
+            return
+          }
+          return
+
+        } else if (cells[scale2Position - width].classList.contains('walls')) {
+          scale2PositionDirection = randomButUp()
+          return
+        }
+        cells[scale2Position].classList.remove('scale2')
+        scale2Position -= width
+        cells[scale2Position].classList.add('scale2')
+        // CURRENT DIRECTION - DOWN
+      } else if (scale2PositionDirection === 'down') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale2Position - 1].classList.contains('walls') && cells[scale2Position + width].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeftDown()
+          return
+        } else if (cells[scale2Position + 1].classList.contains('walls') && cells[scale2Position + width].classList.contains('walls')) {
+          scale2PositionDirection = randomButRightDown()
+          return
+        } else if (cells[scale2Position - 1].classList.contains('walls') && !cells[scale2Position + 1].classList.contains('walls')) {
+          scale2PositionDirection = randomButLeftUp()
+          if (scale2PositionDirection === 'down') {
+            cells[scale2Position].classList.remove('scale2')
+            scale2Position += width
+            cells[scale2Position].classList.add('scale2')
+            return
+          }
+          return
+        } else if (cells[scale2Position + 1].classList.contains('walls') && !cells[scale2Position - 1].classList.contains('walls')) {
+          scale2PositionDirection = randomButRightUp()
+          if (scale2PositionDirection === 'down') {
+            cells[scale2Position].classList.remove('scale2')
+            scale2Position += width
+            cells[scale2Position].classList.add('scale2')
+            return
+          }
+          return
+        } else if (cells[scale2Position + width].classList.contains('walls')) {
+          scale2PositionDirection = randomButDown()
+          return
+        }
+        cells[scale2Position].classList.remove('scale2')
+        scale2Position += width
+        cells[scale2Position].classList.add('scale2')
+      }
+    }, 200)
+  }
+  scale2Chase()
+
+  // SCALE3 MOVEMENTS
+  function scale3Chase() {
+    setInterval(() => {
+      // When Scale3 catches Eater
+      if (scale3Position === eaterPosition) {
+        cells[eaterPosition].classList.remove('eater')
+        setTimeout(() => {
+          eaterPosition = 112
+          cells[eaterPosition].classList.add('eater')
+        }, 100)
+      }
+      // CURRENT DIRECTION - LEFT
+      if (scale3PositionDirection === 'left') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale3Position - 1].classList.contains('walls') && cells[scale3Position - width].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeftUp()
+          return
+        } else if (cells[scale3Position - 1].classList.contains('walls') && cells[scale3Position + width].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeftDown()
+          return
+        } else if (cells[scale3Position - 1].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeft()
+          return
+        } else if (cells[scale3Position - width].classList.contains('walls') && !cells[scale3Position - 1].classList.contains('walls')) {
+          scale3PositionDirection = randomButRightUp()
+          if (scale3PositionDirection === 'left') {
+            cells[scale3Position].classList.remove('scale3')
+            scale3Position--
+            cells[scale3Position].classList.add('scale3')
+            return
+          }
+          return
+        }
+        cells[scale3Position].classList.remove('scale3')
+        scale3Position--
+        cells[scale3Position].classList.add('scale3')
+        // CURRENT DIRECTION - RIGHT
+      } else if (scale3PositionDirection === 'right') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale3Position + 1].classList.contains('walls') && cells[scale3Position - width].classList.contains('walls')) {
+          scale3PositionDirection = randomButRightUp()
+          return
+        } else if (cells[scale3Position + 1].classList.contains('walls') && cells[scale3Position + width].classList.contains('walls')) {
+          scale3PositionDirection = randomButRightDown()
+          return
+        } else if (cells[scale3Position + 1].classList.contains('walls')) {
+          scale3PositionDirection = randomButRight()
+          return
+        } else if (cells[scale3Position - width].classList.contains('walls') && !cells[scale3Position + width].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeftUp()
+          if (scale3PositionDirection === 'right') {
+            cells[scale3Position].classList.remove('scale3')
+            scale3Position++
+            cells[scale3Position].classList.add('scale3')
+            return
+          }
+          return
+        }
+        cells[scale3Position].classList.remove('scale3')
+        scale3Position++
+        cells[scale3Position].classList.add('scale3')
+        // CURRENT DIRECTION - UP
+      } else if (scale3PositionDirection === 'up') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale3Position - 1].classList.contains('walls') && cells[scale3Position - width].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeftUp()
+          return
+        } else if (cells[scale3Position + 1].classList.contains('walls') && cells[scale3Position - width].classList.contains('walls')) {
+          scale3PositionDirection = randomButRightUp()
+          return
+        } else if (cells[scale3Position - 1].classList.contains('walls') && !cells[scale3Position + 1].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeftDown()
+          if (scale3PositionDirection === 'up') {
+            cells[scale3Position].classList.remove('scale3')
+            scale3Position -= width
+            cells[scale3Position].classList.add('scale3')
+            return
+          }
+          return
+        } else if (cells[scale3Position + 1].classList.contains('walls') && !cells[scale3Position - 1].classList.contains('walls')) {
+          scale3PositionDirection = randomButRightDown()
+          if (scale3PositionDirection === 'up') {
+            cells[scale3Position].classList.remove('scale3')
+            scale3Position -= width
+            cells[scale3Position].classList.add('scale3')
+            return
+          }
+          return
+
+        } else if (cells[scale3Position - width].classList.contains('walls')) {
+          scale3PositionDirection = randomButUp()
+          return
+        }
+        cells[scale3Position].classList.remove('scale3')
+        scale3Position -= width
+        cells[scale3Position].classList.add('scale3')
+        // CURRENT DIRECTION - DOWN
+      } else if (scale3PositionDirection === 'down') {
+        // CHECKS FOR WALL CLASHES
+        if (cells[scale3Position - 1].classList.contains('walls') && cells[scale3Position + width].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeftDown()
+          return
+        } else if (cells[scale3Position + 1].classList.contains('walls') && cells[scale3Position + width].classList.contains('walls')) {
+          scale3PositionDirection = randomButRightDown()
+          return
+        } else if (cells[scale3Position - 1].classList.contains('walls') && !cells[scale3Position + 1].classList.contains('walls')) {
+          scale3PositionDirection = randomButLeftUp()
+          if (scale3PositionDirection === 'down') {
+            cells[scale3Position].classList.remove('scale3')
+            scale3Position += width
+            cells[scale3Position].classList.add('scale3')
+            return
+          }
+          return
+        } else if (cells[scale3Position + 1].classList.contains('walls') && !cells[scale3Position - 1].classList.contains('walls')) {
+          scale3PositionDirection = randomButRightUp()
+          if (scale3PositionDirection === 'down') {
+            cells[scale3Position].classList.remove('scale3')
+            scale3Position += width
+            cells[scale3Position].classList.add('scale3')
+            return
+          }
+          return
+        } else if (cells[scale3Position + width].classList.contains('walls')) {
+          scale3PositionDirection = randomButDown()
+          return
+        }
+        cells[scale3Position].classList.remove('scale3')
+        scale3Position += width
+        cells[scale3Position].classList.add('scale3')
+      }
+    }, 200)
+  }
+  scale3Chase()
 
   // DRAWING A GRID 
   for (let i = 0; i < gridCellCount; i++) {
@@ -270,27 +517,23 @@ function main() {
       cell.classList.add('walls')
       break
     }
-   
+
     // SCATTERED WALLS
-    while (i === width * 2 || i >= width * 2 + 2 && i <= width * 2 + 3 || i >= 35 && i <= 39 || i >= 65 && i <= 69 || i >= width * 3 - 4 && i <= width * 3 - 3 || i === width * 3 - 1 || i === width * 4 || i >= width * 4 + 2 && i <= width * 4 + 3 || i >= width * 5 - 4 && i <= width * 5 - 3 || i === width * 5 - 1 || i >= width * 6 + 2 && i <= width * 6 + 6 || i >= width * 7 - 7 && i <= width * 7 - 3 || i >= width * 8 + 2 && i <= width * 8 + 6 || i >= width * 9 - 7 && i <= width * 9 - 3 || i === width * 10 || i === width * 11 - 1 || i >= width * 10 + 2 && i <= width * 10 + 3 || i >= width * 10 + 5 && i <= width * 10 + 6 || i >= width * 11 - 7 && i <= width * 11 - 6 || i >= width * 11 - 4 && i <= width * 11 - 3 || i === width * 11 || i >= width * 11 + 2 && i <= width * 11 + 3 || i >= width * 12 - 4 && i <= width * 12 - 3 || i === width * 12 - 1 || i === width * 12 || i >= width * 12 + 2 && i <= width * 12 + 3 || i >= width * 12 + 5 && i <= width * 12 + 6 || i >= width * 13 - 7 && i <= width * 13 - 6 || i >= width * 13 - 4 && i <= width * 13 - 3 || i === width * 13 - 1 || i === width * 13 || i === width * 14 - 1) {
+    while (i === width * 2 || i >= width * 2 + 2 && i <= width * 2 + 3 || i >= width * 2 + 5 && i <= width * 2 + 9 || i >= width * 4 + 5 && i <= width * 4 + 9 || i >= width * 3 - 4 && i <= width * 3 - 3 || i === width * 3 - 1 || i === width * 4 || i >= width * 4 + 2 && i <= width * 4 + 3 || i >= width * 5 - 4 && i <= width * 5 - 3 || i === width * 5 - 1 || i >= width * 6 + 2 && i <= width * 6 + 6 || i >= width * 7 - 7 && i <= width * 7 - 3 || i >= width * 8 + 2 && i <= width * 8 + 6 || i >= width * 9 - 7 && i <= width * 9 - 3 || i === width * 10 || i === width * 11 - 1 || i >= width * 10 + 2 && i <= width * 10 + 3 || i >= width * 10 + 5 && i <= width * 10 + 6 || i >= width * 11 - 7 && i <= width * 11 - 6 || i >= width * 11 - 4 && i <= width * 11 - 3 || i === width * 11 || i >= width * 11 + 2 && i <= width * 11 + 3 || i >= width * 12 - 4 && i <= width * 12 - 3 || i === width * 12 - 1 || i === width * 12 || i >= width * 12 + 2 && i <= width * 12 + 3 || i >= width * 12 + 5 && i <= width * 12 + 6 || i >= width * 13 - 7 && i <= width * 13 - 6 || i >= width * 13 - 4 && i <= width * 13 - 3 || i === width * 13 - 1 || i === width * 13 || i === width * 14 - 1) {
       cell.classList.remove('food')
       cell.classList.add('walls')
       break
     }
     if (i === scale1Position) {
-      cell.classList.remove('food')
       cell.classList.add('scale1')
     }
     if (i === scale2Position) {
-      cell.classList.remove('food')
       cell.classList.add('scale2')
     }
     if (i === scale3Position) {
-      cell.classList.remove('food')
       cell.classList.add('scale3')
     }
     if (i === scale4Position) {
-      cell.classList.remove('food')
       cell.classList.add('scale4')
     }
     if (i === eaterPosition) {
@@ -322,9 +565,12 @@ function main() {
       // CHECKING FOR WALLS AND SCALES
       if (cells[eaterPosition + 1].classList.contains('walls')) {
         return
-      } if (cells[eaterPosition + 1].classList.contains('scale1')) {
+      } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
-        eaterPosition = 112 - 1
+        setTimeout(() => {
+          eaterPosition = 112
+          cells[eaterPosition].classList.add('eater')
+        }, 100)
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += 1
@@ -351,9 +597,12 @@ function main() {
       // CHECKING FOR WALLS AND SCALE1
       if (cells[eaterPosition - 1].classList.contains('walls')) {
         return
-      } if (cells[eaterPosition - 1].classList.contains('scale1')) {
+      } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
-        eaterPosition = 112 + 1
+        setTimeout(() => {
+          eaterPosition = 112
+          cells[eaterPosition].classList.add('eater')
+        }, 100)
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= 1
@@ -367,9 +616,12 @@ function main() {
         // CHECKING FOR WALLS AND SCALE1
       } if (cells[eaterPosition - width].classList.contains('walls')) {
         return
-      } if (cells[eaterPosition - width].classList.contains('scale1')) {
+      } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
-        eaterPosition = 112
+        setTimeout(() => {
+          eaterPosition = 112
+          cells[eaterPosition].classList.add('eater')
+        }, 100)
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= width
@@ -383,9 +635,12 @@ function main() {
         // CHECKING FOR WALLS AND SCALE1
       } if (cells[eaterPosition + width].classList.contains('walls')) {
         return
-      } if (cells[eaterPosition + width].classList.contains('scale1')) {
+      } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
-        eaterPosition = 112
+        setTimeout(() => {
+          eaterPosition = 112
+          cells[eaterPosition].classList.add('eater')
+        }, 100)
       }
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += width

@@ -25,10 +25,26 @@ body {
   width: 6.66%;
   background-color: grey;
 }
+.walls {
+  background-image: url(images/walls.png);
+  background-size: contain;
+}
 
 .eater {
   background-image: url(images/eater.png);
   background-size: cover;
+  background-position: center;
+}
+
+.powerfood {
+  background-image: url(images/avocado.png);
+  background-size: contain;
+}
+
+.food {
+  background-image: url(images/burger.png);
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
@@ -52,19 +68,3 @@ body {
   background-size: contain;
 }
 
-.powerfood {
-  background-image: url(images/avocado.png);
-  background-size: contain;
-}
-
-.food {
-  background-image: url(images/burger.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.walls {
-  background-image: url(images/walls.png);
-  background-size: contain;
-}
