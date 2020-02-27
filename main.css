@@ -58,8 +58,10 @@ body {
 }
 
 .fries {
-  background-image: url(images/fries-cartoon.png);
+  background-image: url(images/burger.png);
   background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .walls,

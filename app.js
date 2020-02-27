@@ -4,7 +4,7 @@ function main() {
   const gridCellCount = height * width
   const grid = document.querySelector('.grid')
   const cells = []
-  const junctions = [16, 19, 25, 28, 46, 49, 55, 58, 76, 79, 82, 85, 88, 106, 112, 118, 136, 139, 142, 145, 148, 169, 172, 175, 196, 199, 202,205, 208]
+  const junctions = [16, 19, 25, 28, 46, 49, 55, 58, 76, 79, 82, 85, 88, 106, 112, 118, 136, 139, 142, 145, 148, 169, 172, 175, 196, 199, 202, 205, 208]
   const walls = []
   let eaterPosition = 112
   let scale1Position = 22
@@ -12,20 +12,143 @@ function main() {
   let scaleMove = 1
   let scale1Path = []
   let eaterPath = []
-  const direction = ['up', 'right', 'down', 'left']
-  // const up = scale1Position - width
-  // const down = scale1Position + width
-  // const right = scale1Position++
-  // const left = scale1Position--
-  // const topLeftCorner = document.querySelector('.wallTopLeftCorner')
-  // const topRightCorner = document.querySelector('.wallTopRightCorner')
-  // const bottomLeftCorner = document.querySelector('.wallBottomLeftCorner')
-  // const bottomRightCorner = document.querySelector('.wallBottomRightCorner')
+  // DIRECTION ARRAYS
+  const directionLeft = ['up', 'right', 'down']
+  const directionRight = ['up', 'left', 'down']
+  const directionUp = ['left', 'right', 'down']
+  const directionDown = ['up', 'right', 'left']
+  const directionLeftRight = ['up', 'down']
+  const directionLeftUp = ['right', 'down']
+  const directionLeftDown = ['right', 'up']
+  const directionRightUp = ['left', 'down']
+  const directionRightDown = ['left', 'up']
+  const directionUpDown = ['up', 'down']
+  // DIRECTIONS
+  const up = scale1Position - width
+  const down = scale1Position + width
+  const right = scale1Position + 1
+  const left = scale1Position - 1
+
+  // FUNCTIONS FOR RANDOM DIRECTIONS
+  function randomButLeft() {
+    const random = Math.floor(Math.random() * directionLeft.length)
+    // console.log(random) 
+    // console.log(direction[random])
+    return directionLeft[random]
+  }
+  function randomButRight() {
+    const random = Math.floor(Math.random() * directionRight.length)
+    return directionRight[random]
+  }
+  function randomButUp() {
+    const random = Math.floor(Math.random() * directionUp.length)
+    return directionUp[random]
+  }
+  function randomButDown() {
+    const random = Math.floor(Math.random() * directionDown.length)
+    return directionDown[random]
+  }
+  function randomButLeftRight() {
+    const random = Math.floor(Math.random() * directionLeftRight.length)
+    return directionLeftRight[random]
+  }
+  function randomButLeftUp() {
+    const random = Math.floor(Math.random() * directionLeftUp.length)
+    return directionLeftUp[random]
+  }
+  function randomButLeftDown() {
+    const random = Math.floor(Math.random() * directionLeftDown.length)
+    return directionLeftDown[random]
+  }
+  function randomButRightUp() {
+    const random = Math.floor(Math.random() * directionRightUp.length)
+    return directionRightUp[random]
+  }
+  function randomButRightDown() {
+    const random = Math.floor(Math.random() * directionRightDown.length)
+    return directionRightDown[random]
+  }
+  function randomButUpDown() {
+    const random = Math.floor(Math.random() * directionUpDown.length)
+    return directionUpDown[random]
+  }
+  function scale1Chase() {
+    setInterval(() => {
+      if (scale1PositionDirection === 'right') {
+        if (junctions.includes(scale1Position)) {
+          if (cells[scale1Position - width].classList.contains('walls')) {
+
+            scale1PositionDirection = randomButUp()
+            console.log('but up')
+            return 
+          }
+          // } else if (cells[scale1Position - width].classList.contains('walls')) {
+          //   scale1PositionDirection = randomDirection()
+          // }
+        } else {
+
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position++
+          cells[scale1Position].classList.add('scale1')
+        }
+
+      } else if (scale1PositionDirection === 'left') {
+        if (junctions.includes(scale1Position)) {
+          if (cells[scale1Position - 1].classList.contains('walls')) {
+
+            scale1PositionDirection = randomButLeft()
+            console.log('but left')
+            return 
+          }
+          // } else if (cells[scale1Position - width].classList.contains('walls')) {
+          //   scale1PositionDirection = randomDirection()
+          // }
+        } else {
+
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position--
+          cells[scale1Position].classList.add('scale1')
+        }
+      } else if (scale1PositionDirection === 'up') {
+        if (junctions.includes(scale1Position)) {
+          if (cells[scale1Position - width].classList.contains('walls')) {
+
+            scale1PositionDirection = randomButDown()
+          }
+          // } else if (cells[scale1Position - width].classList.contains('walls')) {
+          //   scale1PositionDirection = randomDirection()
+          // }
+        } else {
+
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position -= width
+          cells[scale1Position].classList.add('scale1')
+        }
 
 
+      } else if (scale1PositionDirection === 'down') {
+        if (junctions.includes(scale1Position)) {
+          if (cells[scale1Position + width].classList.contains('walls')) {
+
+            scale1PositionDirection = randomButDown()
+          }
+          // } else if (cells[scale1Position - width].classList.contains('walls')) {
+          //   scale1PositionDirection = randomDirection()
+          // }
+        } else {
+
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position += width
+          cells[scale1Position].classList.add('scale1')
+        }
+      }
+
+    }, 300)
+  }
+  scale1Chase()
 
 
-
+  // COORDINATES FOR CHASING PACMAN
   function coords(input) {
     const eaterX = eaterPosition % width
     const eaterY = (eaterPosition - eaterX) / width
@@ -43,7 +166,7 @@ function main() {
       return 'up'
     }
   }
-
+  console.log(scale1Position)
   // SET INTERVAL SCALE 1
   // const scale1Interval = setInterval(() => {
   //   if (scale1Position === 0) {
@@ -56,7 +179,7 @@ function main() {
   //   eaterPosition = 112
   //   cells[112].classList.add('eater')
   // }
-  console.log(scale1Position)
+
 
   // cells[scale1Position].classList.remove('scale1')
   // // cells[scale1Position].classList.add('fries')
@@ -65,13 +188,7 @@ function main() {
   // cells[scale1Position].classList.add('scale1')
 
 
-  function randomDirection() {
-    const random = Math.floor(Math.random() * direction.length)
-    // console.log(random) 
-    // console.log(direction[random])
-    return direction[random]
-  }
-  // randomDirection()
+
 
 
 
@@ -104,56 +221,58 @@ function main() {
   // }, 500)
 
   // SCALE1 SETINTERVAL 300
-  function scale1Chase() {
-    setInterval(() => {
-      if (scale1PositionDirection === 'right') {
-        if (junctions.includes('cells[scale1Position]')) {
-          scale1PositionDirection = randomDirection()
-        } else if (cells[scale1Position + 1].classList.contains('walls')) {
-          scale1PositionDirection = randomDirection()
-          return
-        } else {
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position++
-          cells[scale1Position].classList.add('scale1')
-        }
-      } else if (scale1PositionDirection === 'left') {
-        if (junctions.includes(cells[scale1Position])) {
-          scale1PositionDirection = randomDirection()
-        } else if (cells[scale1Position - 1].classList.contains('walls')) {
-          scale1PositionDirection = randomDirection()
-          return
-        } else {
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position--
-          cells[scale1Position].classList.add('scale1')
-        }
-      } else if (scale1PositionDirection === 'up') {
-        if (junctions.includes(cells[scale1Position])) {
-          scale1PositionDirection = randomDirection()
-        } else if (cells[scale1Position - width].classList.contains('walls')) {
-          scale1PositionDirection = randomDirection()
-          return
-        } else {
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position -= width
-          cells[scale1Position].classList.add('scale1')
-        }
-      } else if (scale1PositionDirection === 'down') {
-        if (junctions.includes(cells[scale1Position])) {
-          scale1PositionDirection = randomDirection()
-        } else if (cells[scale1Position + width].classList.contains('walls')) {
-          scale1PositionDirection = randomDirection()
-          return
-        } else {
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position += width
-          cells[scale1Position].classList.add('scale1')
-        }
-      }
-    }, 300)
-  }
-  scale1Chase()
+  // function scale1Chase() {
+  //   setInterval(() => {
+  //     if (scale1PositionDirection === 'right') {
+  //       if (scale1Position === 25) {
+  //         scale1PositionDirection = randomDirection()
+  //         if (cells[scale1Position + 1].classList.contains('walls')) {
+  //           scale1PositionDirection = randomDirection()
+  //         } else if (cells[scale1Position - width].classList.contains('walls')) {
+  //           scale1PositionDirection = randomDirection()
+  //         }
+  //       } else {
+  //         cells[scale1Position].classList.remove('scale1')
+  //         scale1Position++
+  //         cells[scale1Position].classList.add('scale1')
+  //       }
+  //     } else if (scale1PositionDirection === 'left') {
+  //       if (scale1Position === 19) {
+  //         scale1PositionDirection = coords()
+  //       } else if (cells[scale1Position - 1].classList.contains('walls')) {
+  //         scale1PositionDirection = coords()
+  //         return
+  //       } else {
+  //         cells[scale1Position].classList.remove('scale1')
+  //         scale1Position--
+  //         cells[scale1Position].classList.add('scale1')
+  //       }
+  //     } else if (scale1PositionDirection === 'up') {
+  //       if (scale1Position === 19) {
+  //         scale1PositionDirection = coords()
+  //       } else if (cells[scale1Position - width].classList.contains('walls')) {
+  //         scale1PositionDirection = coords()
+  //         return
+  //       } else {
+  //         cells[scale1Position].classList.remove('scale1')
+  //         scale1Position -= width
+  //         cells[scale1Position].classList.add('scale1')
+  //       }
+  //     } else if (scale1PositionDirection === 'down') {
+  //       if (scale1Position === 19) {
+  //         scale1PositionDirection = coords()
+  //       } else if (cells[scale1Position + width].classList.contains('walls')) {
+  //         scale1PositionDirection = coords()
+  //         return
+  //       } else {
+  //         cells[scale1Position].classList.remove('scale1')
+  //         scale1Position += width
+  //         cells[scale1Position].classList.add('scale1')
+  //       }
+  //     }
+  //   }, 300)
+  // }
+  // scale1Chase()
 
 
   // FIXED PATH
@@ -196,22 +315,6 @@ function main() {
   // scale1Position -= scaleMove
   // scale1Path.push(scale1Position)
 
-  // else if ()
-  // scale1Position += scaleMove + width * 2 + 1
-  // || cells[scale1Position - 1].classList.contains('walls') || cells[scale1Position + width].classList.contains('walls') || cells[scale1Position - width].classList.contains('walls')) {
-  //   console.log('There is a right wall')
-
-
-  // } else if (cells[scale1Position + 1].classList.contains('walls')) {
-  //   scale1Position -= scaleMove
-  //   console.log('wall on the right')
-  // } else if (cells[scale1Position + width].classList.contains('walls')) {
-  //   scale1Position -= width
-  //   console.log('wall below')
-  // } else { 
-  //   scale1Position += width
-  //   console.log('wall above')
-  // }
 
 
   // if (cells[scale1Position - 1].classList.contains('walls')) {
@@ -248,67 +351,17 @@ function main() {
 
   // }, 500)
 
-  // MAP LAYOUT
-  // const map = [
-  //   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
-  //   [0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0],
-  //   [0, 5, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
-  //   [0, 5, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
-  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
-  //   [0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0],
-  //   [0, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 0],
-  //   [0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0],
-  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
-  //   [0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0],
-  //   [0, 5, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 5, 0],
-  //   [0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 5, 0],
-  //   [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0],
-  //   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]
-  // ]
-
-  // DRAWING A GRID 
-  // function drawMap() {
-  //   for (let i = 0; i < gridCellCount; i++) {
-  //     const cell = document.createElement('div')
-  //     cell.classList.add('cell')
-  //     for (let j = 0; j < map.length; j++) {
-  //       if (map[i] && map[j] === 0) {
-  //         cell.classList.add('walls')
-  //       } else if (map[i, j] === 1) {
-  //         cell.classList.add('wallTopLeftCorner')
-  //       } else if (map[i, j] === 2) {
-  //         cell.classList.add('wallTopRightCorner')
-  //       } else if (map[i, j] === 3) {
-  //         cell.classList.add('wallBottomRightCorner')
-  //       } else if (map[i, j] === 4) {
-  //         cell.classList.add('wallBottomLeftCorner')
-  //       } else if (map[i, j] === 5) {
-  //         cell.classList.add('fries')
-  //         cell.classList.add('path')
-  //       } else if (map[i, j] === 6) {
-  //         cell.classList.add('empty')
-  //       }
-  //     }
-  //     if (i === eaterPosition) {
-  //       cell.classList.remove('fries')
-  //       cell.classList.add('eater')
-  //     }
-  //     if (i === scale1Position) {
-  //       cell.classList.remove('fries')
-  //       cell.classList.add('scale1')
-  //     }
-  //     grid.appendChild(cell)
-  //     cells.push(cell)
-  //   }
-  // }
-  // drawMap()
 
   // DRAWING A GRID 
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
     cell.classList.add('cell')
-
+    if (!cell.classList.contains('wall')) {
+      cell.classList.add('path')
+    }
+    // if (cell.classList.contains('path')) {
+    //   cell.classList.add('fries')
+    // }
 
     // // BORDER WALLS
     while (i <= width - 1 || i === width || i === width * 2 - 1 || i === width * 3 || i === width * 4 - 1 || i === width * 5 || i === width * 6 - 1 || i === width * 6 || i === width * 7 - 1 || i === width * 7 || i === width * 8 - 1 || i === width * 8 || i === width * 9 - 1 || i === width * 9 || i === width * 10 - 1 || i >= width * 14) {
@@ -365,6 +418,7 @@ function main() {
       cell.classList.remove('fries')
       cell.classList.add('scale1')
     }
+
     grid.appendChild(cell)
     cells.push(cell)
   }
