@@ -52,23 +52,19 @@ body {
   background-size: contain;
 }
 
-#avocado {
+.powerfood {
   background-image: url(images/avocado.png);
   background-size: contain;
 }
 
-.fries {
+.food {
   background-image: url(images/burger.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.walls,
-.wallTopLeftCorner,
-.wallTopRightCorner,
-.wallBottomLeftCorner,
-.wallBottomRightCorner {
+.walls {
   background-image: url(images/walls.png);
   background-size: contain;
 }
