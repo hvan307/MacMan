@@ -8,145 +8,27 @@ function main() {
   const walls = []
   let eaterPosition = 112
   let scale1Position = 22
-  let scale1PositionDirection = 'right'
+  let scale1PositionDirection = 'left'
   let scaleMove = 1
   let scale1Path = []
   let eaterPath = []
   // DIRECTION ARRAYS
-  const directionLeft = ['up', 'right', 'down']
-  const directionRight = ['up', 'left', 'down']
-  const directionUp = ['left', 'right', 'down']
-  const directionDown = ['up', 'right', 'left']
-  const directionLeftRight = ['up', 'down']
-  const directionLeftUp = ['right', 'down']
-  const directionLeftDown = ['right', 'up']
-  const directionRightUp = ['left', 'down']
-  const directionRightDown = ['left', 'up']
-  const directionUpDown = ['up', 'down']
+  const direction = ['up', 'right', 'down', 'left']
+  const directionButLeft = ['up', 'right', 'down']
+  const directionButRight = ['up', 'left', 'down']
+  const directionButUp = ['left', 'right', 'down']
+  const directionButDown = ['up', 'right', 'left']
+  const directionButLeftRight = ['up', 'down']
+  const directionButLeftUp = ['right', 'down']
+  const directionButLeftDown = ['right', 'up']
+  const directionButRightUp = ['left', 'down']
+  const directionButRightDown = ['left', 'up']
+  const directionButUpDown = ['right', 'left']
   // DIRECTIONS
-  const up = scale1Position - width
-  const down = scale1Position + width
-  const right = scale1Position + 1
-  const left = scale1Position - 1
-
-  // FUNCTIONS FOR RANDOM DIRECTIONS
-  function randomButLeft() {
-    const random = Math.floor(Math.random() * directionLeft.length)
-    // console.log(random) 
-    // console.log(direction[random])
-    return directionLeft[random]
-  }
-  function randomButRight() {
-    const random = Math.floor(Math.random() * directionRight.length)
-    return directionRight[random]
-  }
-  function randomButUp() {
-    const random = Math.floor(Math.random() * directionUp.length)
-    return directionUp[random]
-  }
-  function randomButDown() {
-    const random = Math.floor(Math.random() * directionDown.length)
-    return directionDown[random]
-  }
-  function randomButLeftRight() {
-    const random = Math.floor(Math.random() * directionLeftRight.length)
-    return directionLeftRight[random]
-  }
-  function randomButLeftUp() {
-    const random = Math.floor(Math.random() * directionLeftUp.length)
-    return directionLeftUp[random]
-  }
-  function randomButLeftDown() {
-    const random = Math.floor(Math.random() * directionLeftDown.length)
-    return directionLeftDown[random]
-  }
-  function randomButRightUp() {
-    const random = Math.floor(Math.random() * directionRightUp.length)
-    return directionRightUp[random]
-  }
-  function randomButRightDown() {
-    const random = Math.floor(Math.random() * directionRightDown.length)
-    return directionRightDown[random]
-  }
-  function randomButUpDown() {
-    const random = Math.floor(Math.random() * directionUpDown.length)
-    return directionUpDown[random]
-  }
-  function scale1Chase() {
-    setInterval(() => {
-      if (scale1PositionDirection === 'right') {
-        if (junctions.includes(scale1Position)) {
-          if (cells[scale1Position - width].classList.contains('walls')) {
-
-            scale1PositionDirection = randomButUp()
-            console.log('but up')
-            return 
-          }
-          // } else if (cells[scale1Position - width].classList.contains('walls')) {
-          //   scale1PositionDirection = randomDirection()
-          // }
-        } else {
-
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position++
-          cells[scale1Position].classList.add('scale1')
-        }
-
-      } else if (scale1PositionDirection === 'left') {
-        if (junctions.includes(scale1Position)) {
-          if (cells[scale1Position - 1].classList.contains('walls')) {
-
-            scale1PositionDirection = randomButLeft()
-            console.log('but left')
-            return 
-          }
-          // } else if (cells[scale1Position - width].classList.contains('walls')) {
-          //   scale1PositionDirection = randomDirection()
-          // }
-        } else {
-
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position--
-          cells[scale1Position].classList.add('scale1')
-        }
-      } else if (scale1PositionDirection === 'up') {
-        if (junctions.includes(scale1Position)) {
-          if (cells[scale1Position - width].classList.contains('walls')) {
-
-            scale1PositionDirection = randomButDown()
-          }
-          // } else if (cells[scale1Position - width].classList.contains('walls')) {
-          //   scale1PositionDirection = randomDirection()
-          // }
-        } else {
-
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position -= width
-          cells[scale1Position].classList.add('scale1')
-        }
-
-
-      } else if (scale1PositionDirection === 'down') {
-        if (junctions.includes(scale1Position)) {
-          if (cells[scale1Position + width].classList.contains('walls')) {
-
-            scale1PositionDirection = randomButDown()
-          }
-          // } else if (cells[scale1Position - width].classList.contains('walls')) {
-          //   scale1PositionDirection = randomDirection()
-          // }
-        } else {
-
-          cells[scale1Position].classList.remove('scale1')
-          scale1Position += width
-          cells[scale1Position].classList.add('scale1')
-        }
-      }
-
-    }, 300)
-  }
-  scale1Chase()
-
+  // const up = scale1Position - width
+  // const down = scale1Position + width
+  // const right = scale1Position + 1
+  // const left = scale1Position - 1
 
   // COORDINATES FOR CHASING PACMAN
   function coords(input) {
@@ -167,6 +49,186 @@ function main() {
     }
   }
   console.log(scale1Position)
+
+  // FUNCTIONS FOR RANDOM DIRECTIONS
+  function randomDirection() {
+    const random = Math.floor(Math.random() * direction.length)
+    return direction[random]
+  }
+
+  function randomButLeft() {
+    const random = Math.floor(Math.random() * directionButLeft.length)
+    // console.log(random) 
+    // console.log(direction[random])
+    return directionButLeft[random]
+  }
+  function randomButRight() {
+    const random = Math.floor(Math.random() * directionButRight.length)
+    return directionButRight[random]
+  }
+  function randomButUp() {
+    const random = Math.floor(Math.random() * directionButUp.length)
+    // console.log(directionButUp[random])
+    return directionButUp[random]
+  }
+  function randomButDown() {
+    const random = Math.floor(Math.random() * directionButDown.length)
+    return directionButDown[random]
+  }
+  function randomButLeftRight() {
+    const random = Math.floor(Math.random() * directionButLeftRight.length)
+    return directionButLeftRight[random]
+  }
+  function randomButLeftUp() {
+    const random = Math.floor(Math.random() * directionButLeftUp.length)
+    return directionButLeftUp[random]
+  }
+  function randomButLeftDown() {
+    const random = Math.floor(Math.random() * directionButLeftDown.length)
+    return directionButLeftDown[random]
+  }
+  function randomButRightUp() {
+    const random = Math.floor(Math.random() * directionButRightUp.length)
+    return directionButRightUp[random]
+  }
+  function randomButRightDown() {
+    const random = Math.floor(Math.random() * directionButRightDown.length)
+    return directionButRightDown[random]
+  }
+  function randomButUpDown() {
+    const random = Math.floor(Math.random() * directionButUpDown.length)
+    return directionButUpDown[random]
+  }
+
+  // SCALE1 MOVEMENTS
+  function scale1Chase() {
+    setInterval(() => {
+      console.log(scale1PositionDirection)
+      // CURRENT DIRECTION - LEFT
+      if (scale1PositionDirection === 'left') {
+        if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeftUp()
+          return
+        } else if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position + width].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeftDown()
+          return
+        } else if (cells[scale1Position - 1].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeft()
+
+          return
+        } else if (cells[scale1Position - width].classList.contains('walls') && !cells[scale1Position - 1].classList.contains('walls')) {
+          scale1PositionDirection = randomButRightUp()
+          if (scale1PositionDirection === 'left') {
+            cells[scale1Position].classList.remove('scale1')
+            scale1Position--
+            cells[scale1Position].classList.add('scale1')
+            return
+          }
+          return
+        }
+        cells[scale1Position].classList.remove('scale1')
+        scale1Position--
+        cells[scale1Position].classList.add('scale1')
+      } else if (scale1PositionDirection === 'right') {
+        // CURRENT DIRECTION - RIGHT
+
+        if (cells[scale1Position + 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
+          scale1PositionDirection = randomButRightUp()
+          return
+        } else if (cells[scale1Position + 1].classList.contains('walls') && cells[scale1Position + width].classList.contains('walls')) {
+          scale1PositionDirection = randomButRightDown()
+          return
+        } else if (cells[scale1Position + 1].classList.contains('walls')) {
+          scale1PositionDirection = randomButRight()
+          return
+        } else if (cells[scale1Position - width].classList.contains('walls') && !cells[scale1Position + width].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeftUp()
+          if (scale1PositionDirection === 'right') {
+            cells[scale1Position].classList.remove('scale1')
+            scale1Position++
+            cells[scale1Position].classList.add('scale1')
+            return
+          }
+          return
+        }
+        cells[scale1Position].classList.remove('scale1')
+        scale1Position++
+        cells[scale1Position].classList.add('scale1')
+      } else if (scale1PositionDirection === 'up') {
+        // CURRENT DIRECTION - UP
+        if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeftUp()
+          return
+        } else if (cells[scale1Position + 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
+          scale1PositionDirection = randomButRightUp()
+          return
+        } else if (cells[scale1Position - 1].classList.contains('walls') && !cells[scale1Position + 1].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeftDown()
+          if (scale1PositionDirection === 'up') {
+            cells[scale1Position].classList.remove('scale1')
+            scale1Position -= width
+            cells[scale1Position].classList.add('scale1')
+            return
+          }
+          return
+        } else if (cells[scale1Position + 1].classList.contains('walls') && !cells[scale1Position - 1].classList.contains('walls')) {
+          scale1PositionDirection = randomButRightDown()
+          if (scale1PositionDirection === 'up') {
+            cells[scale1Position].classList.remove('scale1')
+            scale1Position -= width
+            cells[scale1Position].classList.add('scale1')
+            return
+          }
+          return
+
+        } else if (cells[scale1Position - width].classList.contains('walls')) {
+          scale1PositionDirection = randomButUp()
+          return
+        }
+        cells[scale1Position].classList.remove('scale1')
+        scale1Position -= width
+        cells[scale1Position].classList.add('scale1')
+        // CURRENT DIRECTION - DOWN
+      } else if (scale1PositionDirection === 'down') {
+
+        if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position + width].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeftDown()
+          return
+        } else if (cells[scale1Position + 1].classList.contains('walls') && cells[scale1Position + width].classList.contains('walls')) {
+          scale1PositionDirection = randomButRightDown()
+          return
+        } else if (cells[scale1Position - 1].classList.contains('walls') && !cells[scale1Position + 1].classList.contains('walls')) {
+          scale1PositionDirection = randomButLeftUp()
+          if (scale1PositionDirection === 'down') {
+            cells[scale1Position].classList.remove('scale1')
+            scale1Position += width
+            cells[scale1Position].classList.add('scale1')
+            return
+          }
+          return 
+        } else if (cells[scale1Position + 1].classList.contains('walls') && !cells[scale1Position - 1].classList.contains('walls')) {
+          scale1PositionDirection = randomButRightUp()
+          if (scale1PositionDirection === 'down') {
+            cells[scale1Position].classList.remove('scale1')
+            scale1Position += width
+            cells[scale1Position].classList.add('scale1')
+            return
+          }
+          return
+        } else if (cells[scale1Position + width].classList.contains('walls')) {
+          scale1PositionDirection = randomButDown()
+          return
+        }
+        cells[scale1Position].classList.remove('scale1')
+        scale1Position += width
+        cells[scale1Position].classList.add('scale1')
+      }
+    }, 100)
+  }
+  scale1Chase()
+
+
+
   // SET INTERVAL SCALE 1
   // const scale1Interval = setInterval(() => {
   //   if (scale1Position === 0) {
@@ -224,22 +286,24 @@ function main() {
   // function scale1Chase() {
   //   setInterval(() => {
   //     if (scale1PositionDirection === 'right') {
+  //       scale1PositionDirection = coords()
   //       if (scale1Position === 25) {
-  //         scale1PositionDirection = randomDirection()
-  //         if (cells[scale1Position + 1].classList.contains('walls')) {
-  //           scale1PositionDirection = randomDirection()
-  //         } else if (cells[scale1Position - width].classList.contains('walls')) {
-  //           scale1PositionDirection = randomDirection()
-  //         }
-  //       } else {
-  //         cells[scale1Position].classList.remove('scale1')
-  //         scale1Position++
-  //         cells[scale1Position].classList.add('scale1')
+  //         scale1PositionDirection === 'down'
   //       }
-  //     } else if (scale1PositionDirection === 'left') {
-  //       if (scale1Position === 19) {
+  //       if (cells[scale1Position + 1].classList.contains('walls')) {
   //         scale1PositionDirection = coords()
-  //       } else if (cells[scale1Position - 1].classList.contains('walls')) {
+  //         return
+  //       }
+  //     } else {
+  //       cells[scale1Position].classList.remove('scale1')
+  //       scale1Position++
+  //       cells[scale1Position].classList.add('scale1')
+  //     }
+
+  //     if (scale1PositionDirection === 'left') {
+  //       // if (scale1Position === 19) {
+  //       scale1PositionDirection = coords()
+  //       if (cells[scale1Position - 1].classList.contains('walls')) {
   //         scale1PositionDirection = coords()
   //         return
   //       } else {
@@ -247,8 +311,9 @@ function main() {
   //         scale1Position--
   //         cells[scale1Position].classList.add('scale1')
   //       }
-  //     } else if (scale1PositionDirection === 'up') {
-  //       if (scale1Position === 19) {
+
+  //       if (scale1PositionDirection === 'up') {
+  //         // if (scale1Position === 19) {
   //         scale1PositionDirection = coords()
   //       } else if (cells[scale1Position - width].classList.contains('walls')) {
   //         scale1PositionDirection = coords()
@@ -258,13 +323,17 @@ function main() {
   //         scale1Position -= width
   //         cells[scale1Position].classList.add('scale1')
   //       }
-  //     } else if (scale1PositionDirection === 'down') {
-  //       if (scale1Position === 19) {
+  //       if (scale1PositionDirection === 'down') {
+  //         // if (scale1Position === 19) {
   //         scale1PositionDirection = coords()
-  //       } else if (cells[scale1Position + width].classList.contains('walls')) {
-  //         scale1PositionDirection = coords()
-  //         return
-  //       } else {
+  //         if (cells[scale1Position + width].classList.contains('walls')) {
+  //           scale1PositionDirection = coords()
+  //           return
+  //         } else {
+  //           cells[scale1Position].classList.remove('scale1')
+  //           scale1Position += width
+  //           cells[scale1Position].classList.add('scale1')
+  //         }
   //         cells[scale1Position].classList.remove('scale1')
   //         scale1Position += width
   //         cells[scale1Position].classList.add('scale1')
@@ -519,3 +588,51 @@ function main() {
 }
 
 window.addEventListener('DOMContentLoaded', main)
+
+     // if (scale1Position === 25) {
+        // if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position + 1].classList.contains('walls')) {
+        //   scale1PositionDirection = randomButLeftRight()
+        //   // console.log('but left and right')
+        //   console.log(scale1PositionDirection)
+        //   return
+        // } else 
+        // if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
+        //   scale1PositionDirection = randomButLeftUp()
+        //   console.log(scale1PositionDirection)
+        //   if (scale1PositionDirection === 'right') {
+        //     cells[scale1Position].classList.remove('scale1')
+        //     scale1Position++
+        //     cells[scale1Position].classList.add('scale1')
+        //   }
+        //   return
+        // } else if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position + width].classList.contains('walls')) {
+        //   scale1PositionDirection = randomButLeftDown()
+        //   console.log(scale1PositionDirection)
+        //   if (scale1PositionDirection === 'right') {
+        //     cells[scale1Position].classList.remove('scale1')
+        //     scale1Position++
+        //     cells[scale1Position].classList.add('scale1')
+        //     return
+        //   }
+        // } else 
+
+
+
+          // else if (cells[scale1Position - width].classList.contains('walls') && !cells[scale1Position + width].classList.contains('walls')) {
+          //   scale1PositionDirection = randomButUp()
+          //   if (scale1PositionDirection === 'right') {
+          //     cells[scale1Position].classList.remove('scale1')
+          //     scale1Position++
+          //     cells[scale1Position].classList.add('scale1')
+          //   }
+          //   console.log(scale1PositionDirection)
+          //   return
+          // } else if (cells[scale1Position - 1].classList.contains('walls')) {
+          //   scale1PositionDirection = randomButLeft()
+          //   console.log(scale1PositionDirection)
+          //   if (scale1PositionDirection === 'right') {
+          //     cells[scale1Position].classList.remove('scale1')
+          //     scale1Position++
+          //     cells[scale1Position].classList.add('scale1')
+          //     return
+          //   }
