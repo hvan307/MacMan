@@ -28,10 +28,12 @@ function main() {
   const directionButRightDown = ['left', 'up']
   const directionButUpDown = ['right', 'left']
   // SCORE ELEMENTS
-  let score = 0
+  let foodScore = 0
+  let powerfoodScore = 0
   const totalScore = document.querySelector('.score')
   let livesCount = 3
   const lives = document.querySelector('.lives')
+
 
   // COORDINATES FOR CHASING PACMAN
   function coords(input) {
@@ -108,7 +110,7 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       // SCALES COLLISIONS
       if (cells[scale1Position + 1] === scale2Position || cells[scale1Position + 1] === scale3Position || cells[scale1Position + 1] === scale4Position) {
@@ -256,7 +258,7 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       if (cells[scale2Position + 1] === scale1Position || cells[scale2Position + 1] === scale3Position || cells[scale2Position + 1] === scale4Position) {
         return
@@ -400,7 +402,7 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       if (cells[scale3Position + 1] === scale1Position || cells[scale3Position + 1] === scale2Position || cells[scale3Position + 1] === scale4Position) {
         return
@@ -544,7 +546,7 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       if (cells[scale4Position + 1] === scale1Position || cells[scale4Position + 1] === scale2Position || cells[scale4Position + 1] === scale3Position) {
         return
@@ -731,13 +733,20 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
+      foodScore += 5
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition += 1
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
+
       // LEFT ARROW
     } else if (event.key === 'ArrowLeft') {
       // CHECKING FOR WALLS AND SCALE1
@@ -749,13 +758,20 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
+      foodScore += 5
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition -= 1
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
+
       // UP ARROW
     } else if (event.key === 'ArrowUp') {
       // BLOCKING THE BORDER
@@ -770,13 +786,20 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
+      foodScore += 5
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition -= width
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
+
       // DOWN ARROW
     } else if (event.key === 'ArrowDown') {
       // BLOCKING THE BORDER
@@ -791,21 +814,19 @@ function main() {
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
-        }, 100)
+        }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
+      foodScore += 5
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition += width
       cells[eaterPosition].classList.remove('food')
+      cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
-    
-      if (cells[eaterPosition].classList.contains('food')) {
-        score += 5
-        totalScore.value = score
-        totalScore.innerHTML = `Your score: ${score}`
-      }
-      if (eaterPosition === cells[eaterPosition].classList.contains('powerfood'))
-        cells[eaterPosition].classList.remove('powerfood')
-
     }
   })
 
