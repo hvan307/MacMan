@@ -94,11 +94,17 @@ function main() {
 
   // SCALE1 MOVEMENTS
   function scale1Chase() {
-    setInterval(() => {
+    const scale1Interval = setInterval(() => {
+      if (livesCount === 0) {
+        clearInterval(scale1Interval)
+        alert('Game Over!')
+      }
       // SCALE1 AND EATER COLLISION
       if (scale1Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
-        lives -= 1
+        livesCount -= 1
+        lives.value = livesCount
+        lives.innerHTML = `Life: ${livesCount}`
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -237,11 +243,16 @@ function main() {
 
   // SCALE2 MOVEMENTS
   function scale2Chase() {
-    setInterval(() => {
+    const scale2Interval = setInterval(() => {
+      if (livesCount === 0) {
+        clearInterval(scale2Interval)
+      }
       // When Scale2 catches Eater
       if (scale2Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
-        lives -= 1
+        livesCount -= 1
+        lives.value = livesCount
+        lives.innerHTML = `Life: ${livesCount}`
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -376,11 +387,16 @@ function main() {
 
   // SCALE3 MOVEMENTS
   function scale3Chase() {
-    setInterval(() => {
+    const scale3Interval = setInterval(() => {
+      if (livesCount === 0) {
+        clearInterval(scale3Interval)
+      }
       // When Scale3 catches Eater
       if (scale3Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
-        lives -= 1
+        livesCount -= 1
+        lives.value = livesCount
+        lives.innerHTML = `Life: ${livesCount}`
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -515,11 +531,16 @@ function main() {
 
   // SCALE4 MOVEMENTS
   function scale4Chase() {
-    setInterval(() => {
+    const scale4Interval = setInterval(() => {
+      if (livesCount === 0) {
+        clearInterval(scale4Interval)
+      }
       // When Scale4 catches Eater
       if (scale4Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
-        lives -= 1
+        livesCount -= 1
+        lives.value = livesCount
+        lives.innerHTML = `Life: ${livesCount}`
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -692,7 +713,6 @@ function main() {
     }
     if (i === eaterPosition) {
       cell.classList.remove('food')
-      cell.classList.remove('powerfood')
       cell.classList.add('eater')
     }
     grid.appendChild(cell)
@@ -707,6 +727,7 @@ function main() {
         return
       } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
+        livesCount -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -715,6 +736,7 @@ function main() {
       cells[eaterPosition].classList.remove('eater')
       eaterPosition += 1
       cells[eaterPosition].classList.remove('food')
+      cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
       // LEFT ARROW
     } else if (event.key === 'ArrowLeft') {
@@ -723,6 +745,7 @@ function main() {
         return
       } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
+        livesCount -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -731,6 +754,7 @@ function main() {
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= 1
       cells[eaterPosition].classList.remove('food')
+      cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
       // UP ARROW
     } else if (event.key === 'ArrowUp') {
@@ -742,6 +766,7 @@ function main() {
         return
       } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
+        livesCount -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -750,6 +775,7 @@ function main() {
       cells[eaterPosition].classList.remove('eater')
       eaterPosition -= width
       cells[eaterPosition].classList.remove('food')
+      cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
       // DOWN ARROW
     } else if (event.key === 'ArrowDown') {
@@ -761,6 +787,7 @@ function main() {
         return
       } if (eaterPosition === scale1Position || eaterPosition === scale2Position || eaterPosition === scale3Position || eaterPosition === scale4Position) {
         cells[eaterPosition].classList.remove('eater')
+        livesCount -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -770,29 +797,32 @@ function main() {
       eaterPosition += width
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.add('eater')
+    
+      if (cells[eaterPosition].classList.contains('food')) {
+        score += 5
+        totalScore.value = score
+        totalScore.innerHTML = `Your score: ${score}`
+      }
+      if (eaterPosition === cells[eaterPosition].classList.contains('powerfood'))
+        cells[eaterPosition].classList.remove('powerfood')
+
     }
   })
 
-  function scores() {
-    if (eaterPosition === cells[eaterPosition].classList.contains('food')) {
-      score += 5
-      totalScore.value = score
-      totalScore.innerHTML = `Your score: ${score}`
-    }
-    if (eaterPosition === cells[eaterPosition].classList.contains('powerfood')) {
-      score += 20
-      totalScore.value = score
-      totalScore.innerHTML = `Your score: ${score}`
-    }
-  }
-  totalScore()
+  // function scores() {
+  //   if (eaterPosition === cells[eaterPosition].classList.contains('food')) {
+  //     score += 5
+  //     totalScore.value = score
+  //     totalScore.innerHTML = `Your score: ${score}`
+  //   }
+  //   if (eaterPosition === 22 || eaterPosition === 46 || eaterPosition === 146 || eaterPosition === 200) {
+  //     score += 20
+  //     totalScore.value = score
+  //     totalScore.innerHTML = `Your score: ${score}`
+  //   }
+  // }
+  // totalScore()
 
-  function gameover() {
-    if (eaterPosition === scale1Position && lives === 0 || eaterPosition === scale2Position && lives === 0 || eaterPosition === scale3Position && lives === 0 || eaterPosition === scale4Position && lives === 0) {
-      alert('Game Over')
-    }
-    gameover()
-  }
 }
 
 window.addEventListener('DOMContentLoaded', main)
