@@ -27,6 +27,11 @@ function main() {
   const directionButRightUp = ['left', 'down']
   const directionButRightDown = ['left', 'up']
   const directionButUpDown = ['right', 'left']
+  // SCORE ELEMENTS
+  let score = 0
+  const totalScore = document.querySelector('.score')
+  let livesCount = 3
+  const lives = document.querySelector('.lives')
 
   // COORDINATES FOR CHASING PACMAN
   function coords(input) {
@@ -45,12 +50,11 @@ function main() {
       return 'up'
     }
   }
-  coords(scale1Position)
+  coords(eaterPosition, scale1Position)
+  coords(eaterPosition, scale2Position)
+  coords(eaterPosition, scale3Position)
+  coords(eaterPosition, scale4Position)
   // FUNCTIONS FOR RANDOM DIRECTIONS
-  function randomDirection() {
-    const random = Math.floor(Math.random() * direction.length)
-    return direction[random]
-  }
   function randomButLeft() {
     const random = Math.floor(Math.random() * directionButLeft.length)
     // console.log(random) 
@@ -70,10 +74,6 @@ function main() {
     const random = Math.floor(Math.random() * directionButDown.length)
     return directionButDown[random]
   }
-  function randomButLeftRight() {
-    const random = Math.floor(Math.random() * directionButLeftRight.length)
-    return directionButLeftRight[random]
-  }
   function randomButLeftUp() {
     const random = Math.floor(Math.random() * directionButLeftUp.length)
     return directionButLeftUp[random]
@@ -90,10 +90,7 @@ function main() {
     const random = Math.floor(Math.random() * directionButRightDown.length)
     return directionButRightDown[random]
   }
-  function randomButUpDown() {
-    const random = Math.floor(Math.random() * directionButUpDown.length)
-    return directionButUpDown[random]
-  }
+
 
   // SCALE1 MOVEMENTS
   function scale1Chase() {
@@ -101,6 +98,7 @@ function main() {
       // SCALE1 AND EATER COLLISION
       if (scale1Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
+        lives -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -233,7 +231,7 @@ function main() {
         scale1Position += width
         cells[scale1Position].classList.add('scale1')
       }
-    }, 200)
+    }, 150)
   }
   scale1Chase()
 
@@ -243,6 +241,7 @@ function main() {
       // When Scale2 catches Eater
       if (scale2Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
+        lives -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -371,7 +370,7 @@ function main() {
         scale2Position += width
         cells[scale2Position].classList.add('scale2')
       }
-    }, 200)
+    }, 150)
   }
   scale2Chase()
 
@@ -381,6 +380,7 @@ function main() {
       // When Scale3 catches Eater
       if (scale3Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
+        lives -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -519,6 +519,7 @@ function main() {
       // When Scale4 catches Eater
       if (scale4Position === eaterPosition) {
         cells[eaterPosition].classList.remove('eater')
+        lives -= 1
         setTimeout(() => {
           eaterPosition = 112
           cells[eaterPosition].classList.add('eater')
@@ -647,7 +648,7 @@ function main() {
         scale4Position += width
         cells[scale4Position].classList.add('scale4')
       }
-    }, 200)
+    }, 150)
   }
   scale4Chase()
 
@@ -772,7 +773,26 @@ function main() {
     }
   })
 
+  function scores() {
+    if (eaterPosition === cells[eaterPosition].classList.contains('food')) {
+      score += 5
+      totalScore.value = score
+      totalScore.innerHTML = `Your score: ${score}`
+    }
+    if (eaterPosition === cells[eaterPosition].classList.contains('powerfood')) {
+      score += 20
+      totalScore.value = score
+      totalScore.innerHTML = `Your score: ${score}`
+    }
+  }
+  totalScore()
+
+  function gameover() {
+    if (eaterPosition === scale1Position && lives === 0 || eaterPosition === scale2Position && lives === 0 || eaterPosition === scale3Position && lives === 0 || eaterPosition === scale4Position && lives === 0) {
+      alert('Game Over')
+    }
+    gameover()
+  }
 }
 
 window.addEventListener('DOMContentLoaded', main)
-

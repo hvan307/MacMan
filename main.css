@@ -10,6 +10,11 @@ body {
   flex-direction: column;
 }
 
+.start {
+  display: none;
+  height: 100vh;
+}
+
 h1 {
   font-family: 'Modak';
   font-weight: 400;
@@ -17,6 +22,14 @@ h1 {
   color: rgb(0, 0, 0);
   font-stretch: extra-expanded;
   margin: 5px auto;
+}
+
+h4 {
+  font-family: 'Montserrat Alternates', sans-serif;
+  margin: 0 auto;
+}
+p {
+  font-family: 'Montserrat Alternates', sans-serif;
 }
 .grid {
   display: flex;
@@ -26,6 +39,7 @@ h1 {
   height: 600px;
   width: 600px;
   border-radius: 5px;
+  margin: 20px auto;
 }
 
 .cell {
