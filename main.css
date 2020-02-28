@@ -10,6 +10,14 @@ body {
   flex-direction: column;
 }
 
+h1 {
+  font-family: 'Modak';
+  font-weight: 400;
+  font-size: 70px;
+  color: rgb(0, 0, 0);
+  font-stretch: extra-expanded;
+  margin: 5px auto;
+}
 .grid {
   display: flex;
   flex-direction: row;
@@ -23,7 +31,7 @@ body {
 .cell {
   height: 6.67%;
   width: 6.66%;
-  background-color: grey;
+  background-color: white;
 }
 .walls {
   background-image: url(images/walls.png);
@@ -37,7 +45,7 @@ body {
 }
 
 .powerfood {
-  background-image: url(images/avocado.png);
+  background-image: url(images/fries.png);
   background-size: contain;
 }
 
