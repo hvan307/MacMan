@@ -1,4 +1,15 @@
 function main() {
+  // Start setup
+  const start = document.querySelector('.start')
+  const playButton = document.querySelector('#play-button')
+  const game = document.querySelector('.game')
+
+  playButton.addEventListener('click', () => {
+    start.style.display = 'none'
+    game.style.display = 'flex'
+
+  })
+
   // MAP
   const height = 15
   const width = 15
@@ -16,17 +27,14 @@ function main() {
   let scale4Position = 208
   let scale4PositionDirection = 'left'
   // DIRECTION ARRAYS
-  const direction = ['up', 'right', 'down', 'left']
   const directionButLeft = ['up', 'right', 'down']
   const directionButRight = ['up', 'left', 'down']
   const directionButUp = ['left', 'right', 'down']
   const directionButDown = ['up', 'right', 'left']
-  const directionButLeftRight = ['up', 'down']
   const directionButLeftUp = ['right', 'down']
   const directionButLeftDown = ['right', 'up']
   const directionButRightUp = ['left', 'down']
   const directionButRightDown = ['left', 'up']
-  const directionButUpDown = ['right', 'left']
   // SCORE ELEMENTS
   let foodScore = 0
   let powerfoodScore = 0
@@ -57,37 +65,45 @@ function main() {
   coords(eaterPosition, scale3Position)
   coords(eaterPosition, scale4Position)
   // FUNCTIONS FOR RANDOM DIRECTIONS
+  // Random movements except for left
   function randomButLeft() {
     const random = Math.floor(Math.random() * directionButLeft.length)
     // console.log(random) 
     // console.log(direction[random])
     return directionButLeft[random]
   }
+  // Random movements except for right
   function randomButRight() {
     const random = Math.floor(Math.random() * directionButRight.length)
     return directionButRight[random]
   }
+  // Random movements except for up
   function randomButUp() {
     const random = Math.floor(Math.random() * directionButUp.length)
     // console.log(directionButUp[random])
     return directionButUp[random]
   }
+  // Random movements except for down
   function randomButDown() {
     const random = Math.floor(Math.random() * directionButDown.length)
     return directionButDown[random]
   }
+  // Random movements except for left and up
   function randomButLeftUp() {
     const random = Math.floor(Math.random() * directionButLeftUp.length)
     return directionButLeftUp[random]
   }
+  // Random movements except for left and down
   function randomButLeftDown() {
     const random = Math.floor(Math.random() * directionButLeftDown.length)
     return directionButLeftDown[random]
   }
+  // Random movements except for right and up
   function randomButRightUp() {
     const random = Math.floor(Math.random() * directionButRightUp.length)
     return directionButRightUp[random]
   }
+  // Random movements except for right and down
   function randomButRightDown() {
     const random = Math.floor(Math.random() * directionButRightDown.length)
     return directionButRightDown[random]
@@ -684,7 +700,7 @@ function main() {
     }
 
 
-    // // BORDER WALLS
+    // BORDER WALLS
     while (i <= width - 1 || i === width || i === width * 2 - 1 || i === width * 3 || i === width * 4 - 1 || i === width * 5 || i === width * 6 - 1 || i === width * 6 || i === width * 7 - 1 || i === width * 7 || i === width * 8 - 1 || i === width * 8 || i === width * 9 - 1 || i === width * 9 || i === width * 10 - 1 || i >= width * 14) {
       cell.classList.remove('food')
       cell.classList.add('walls')

@@ -8,24 +8,43 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: lightblue;
 }
 
 .start {
-  display: none;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  text-align: center;
+}
+
+button {
+  width: 50px;
+  margin-left: 270px;
 }
 
 h1 {
   font-family: 'Modak';
   font-weight: 400;
   font-size: 70px;
-  color: rgb(0, 0, 0);
+  color: rgba(249, 116, 167, 0.842);
+  text-shadow: 2px 2px white;
+  border: black;
   font-stretch: extra-expanded;
   margin: 5px auto;
+}
+
+.game {
+  display: none;
+  flex-direction: column;
 }
 
 h4 {
   font-family: 'Montserrat Alternates', sans-serif;
   margin: 0 auto;
+  color: white;
+  text-shadow: 1px 1px black;
 }
 p {
   font-family: 'Montserrat Alternates', sans-serif;
