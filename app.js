@@ -37,8 +37,9 @@ function main() {
   // SCORE ELEMENTS
   let foodScore = 0
   let powerfoodScore = 0
+  let foodCount = 104
+  let powerfoodCount = 4
   const totalScore = document.querySelector('.score')
-  const maxScore = 600
   let livesCount = 3
   const lives = document.querySelector('.lives')
 
@@ -113,8 +114,9 @@ function main() {
   // SCALE1 MOVEMENTS
   function scale1Chase() {
     const scale1Interval = setInterval(() => {
-      if (livesCount <= 0 || totalScore === maxScore) {
+      if (livesCount <= 0) {
         clearInterval(scale1Interval)
+        alert('You have lost all of your lives. Game Over!')
       }
       // SCALE1 AND EATER COLLISION
       if (scale1Position === eaterPosition) {
@@ -261,7 +263,7 @@ function main() {
   // SCALE2 MOVEMENTS
   function scale2Chase() {
     const scale2Interval = setInterval(() => {
-      if (livesCount <= 0 || totalScore === maxScore) {
+      if (livesCount <= 0) {
         clearInterval(scale2Interval)
       }
       // When Scale2 catches Eater
@@ -405,7 +407,7 @@ function main() {
   // SCALE3 MOVEMENTS
   function scale3Chase() {
     const scale3Interval = setInterval(() => {
-      if (livesCount <= 0 || totalScore === maxScore) {
+      if (livesCount <= 0) {
         clearInterval(scale3Interval)
       }
       // When Scale3 catches Eater
@@ -549,7 +551,7 @@ function main() {
   // SCALE4 MOVEMENTS
   function scale4Chase() {
     const scale4Interval = setInterval(() => {
-      if (livesCount <= 0 || totalScore === maxScore) {
+      if (livesCount <= 0) {
         clearInterval(scale4Interval)
       }
       // When Scale4 catches Eater
@@ -751,12 +753,14 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
-      // foodScore += 5
-      // totalScore.value = foodScore
-      // totalScore.innerHTML = `Your score: ${foodScore}`
-      // powerfoodScore += 20
-      // totalScore.value = powerfoodScore
-      // totalScore.innerHTML = `Your score: ${powerfoodScore}`
+      foodScore += 5
+      foodCount -= 1
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      powerfoodCount -= 1
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition += 1
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
@@ -776,12 +780,14 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
-      // foodScore += 5
-      // totalScore.value = foodScore
-      // totalScore.innerHTML = `Your score: ${foodScore}`
-      // powerfoodScore += 20
-      // totalScore.value = powerfoodScore
-      // totalScore.innerHTML = `Your score: ${powerfoodScore}`
+      foodScore += 5
+      foodCount -= 1
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      powerfoodCount -= 1
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition -= 1
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
@@ -804,12 +810,14 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
-      // foodScore += 5
-      // totalScore.value = foodScore
-      // totalScore.innerHTML = `Your score: ${foodScore}`
-      // powerfoodScore += 20
-      // totalScore.value = powerfoodScore
-      // totalScore.innerHTML = `Your score: ${powerfoodScore}`
+      foodScore += 5
+      foodCount -= 1
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      powerfoodCount -= 1
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition -= width
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
@@ -832,34 +840,39 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
+      foodScore += 5
+      foodCount -= 1
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+      powerfoodScore += 20
+      powerfoodCount -= 1
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition += width
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
     }
-    if (cells[eaterPosition].classList.contains('food')) {
-      foodScore += 5
-      totalScore.value = foodScore
-      totalScore.innerHTML = `Your score: ${foodScore}`
-    }
-    if (cells[eaterPosition].classList.contains('powerfood')) {
-      powerfoodScore += 20
-      totalScore.value = powerfoodScore
-      totalScore.innerHTML = `Your score: ${powerfoodScore}`
-    }
-    if (totalScore === maxScore) {
+    // if (cells[eaterPosition].classList.contains('food')) {
+    //   foodScore += 5
+    //   foodCount -= 1
+    //   totalScore.value = foodScore
+    //   totalScore.innerHTML = `Your score: ${foodScore}`
+    // }
+    // if (cells[eaterPosition].classList.contains('powerfood')) {
+    //   powerfoodScore += 20
+    //   powerfoodCount -= 1
+    //   totalScore.value = powerfoodScore
+    //   totalScore.innerHTML = `Your score: ${powerfoodScore}`
+    // }
+    if (foodCount === 0 && powerfoodCount === 0) {
       alert('Congratulations! You have won the game!')
     }
   }
   )
-  function gameOver() {
-    if (livesCount <= 0) {
-      alert('Game over!')
-    }
-  }
-  gameOver()
 
-
+console.log(foodCount)
+console.log(powerfoodCount)
 }
 
 
