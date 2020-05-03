@@ -8,9 +8,18 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: lightblue;
+  background-image: url(/Users/hongvan/development/project-1/images/giphycartoonfood.gif);
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(173, 216, 230, 0.945);
+  border-radius: 10px;
+  padding: 10px 20px;
+}
 .start {
   height: 300px;
   display: flex;

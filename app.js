@@ -1,5 +1,5 @@
 function main() {
-  // Start setup
+  // START SETUP
   const start = document.querySelector('.start')
   const playButton = document.querySelector('#play-button')
   const game = document.querySelector('.game')
@@ -7,7 +7,6 @@ function main() {
   playButton.addEventListener('click', () => {
     start.style.display = 'none'
     game.style.display = 'flex'
-
   })
 
   // MAP
@@ -39,31 +38,32 @@ function main() {
   let foodScore = 0
   let powerfoodScore = 0
   const totalScore = document.querySelector('.score')
+  const maxScore = 600
   let livesCount = 3
   const lives = document.querySelector('.lives')
 
 
   // COORDINATES FOR CHASING PACMAN
-  function coords(input) {
-    const eaterX = eaterPosition % width
-    const eaterY = (eaterPosition - eaterX) / width
-    const scale1X = input % width
-    const scale1Y = (input - scale1X) / width
+  // function coords(input) {
+  //   const eaterX = eaterPosition % width
+  //   const eaterY = (eaterPosition - eaterX) / width
+  //   const scale1X = input % width
+  //   const scale1Y = (input - scale1X) / width
 
-    if (scale1X < eaterX) {
-      return 'right'
-    } else if (scale1X > eaterX) {
-      return 'left'
-    } else if (scale1Y < eaterY) {
-      return 'down'
-    } else if (scale1Y > eaterY) {
-      return 'up'
-    }
-  }
-  coords(eaterPosition, scale1Position)
-  coords(eaterPosition, scale2Position)
-  coords(eaterPosition, scale3Position)
-  coords(eaterPosition, scale4Position)
+  //   if (scale1X < eaterX) {
+  //     return 'right'
+  //   } else if (scale1X > eaterX) {
+  //     return 'left'
+  //   } else if (scale1Y < eaterY) {
+  //     return 'down'
+  //   } else if (scale1Y > eaterY) {
+  //     return 'up'
+  //   }
+  // }
+  // coords(eaterPosition, scale1Position)
+  // coords(eaterPosition, scale2Position)
+  // coords(eaterPosition, scale3Position)
+  // coords(eaterPosition, scale4Position)
   // FUNCTIONS FOR RANDOM DIRECTIONS
   // Random movements except for left
   function randomButLeft() {
@@ -113,9 +113,8 @@ function main() {
   // SCALE1 MOVEMENTS
   function scale1Chase() {
     const scale1Interval = setInterval(() => {
-      if (livesCount === 0) {
+      if (livesCount <= 0 || totalScore === maxScore) {
         clearInterval(scale1Interval)
-        alert('Game Over!')
       }
       // SCALE1 AND EATER COLLISION
       if (scale1Position === eaterPosition) {
@@ -262,7 +261,7 @@ function main() {
   // SCALE2 MOVEMENTS
   function scale2Chase() {
     const scale2Interval = setInterval(() => {
-      if (livesCount === 0) {
+      if (livesCount <= 0 || totalScore === maxScore) {
         clearInterval(scale2Interval)
       }
       // When Scale2 catches Eater
@@ -406,7 +405,7 @@ function main() {
   // SCALE3 MOVEMENTS
   function scale3Chase() {
     const scale3Interval = setInterval(() => {
-      if (livesCount === 0) {
+      if (livesCount <= 0 || totalScore === maxScore) {
         clearInterval(scale3Interval)
       }
       // When Scale3 catches Eater
@@ -550,7 +549,7 @@ function main() {
   // SCALE4 MOVEMENTS
   function scale4Chase() {
     const scale4Interval = setInterval(() => {
-      if (livesCount === 0) {
+      if (livesCount <= 0 || totalScore === maxScore) {
         clearInterval(scale4Interval)
       }
       // When Scale4 catches Eater
@@ -752,12 +751,12 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
-      foodScore += 5
-      totalScore.value = foodScore
-      totalScore.innerHTML = `Your score: ${foodScore}`
-      powerfoodScore += 20
-      totalScore.value = powerfoodScore
-      totalScore.innerHTML = `Your score: ${powerfoodScore}`
+      // foodScore += 5
+      // totalScore.value = foodScore
+      // totalScore.innerHTML = `Your score: ${foodScore}`
+      // powerfoodScore += 20
+      // totalScore.value = powerfoodScore
+      // totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition += 1
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
@@ -777,12 +776,12 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
-      foodScore += 5
-      totalScore.value = foodScore
-      totalScore.innerHTML = `Your score: ${foodScore}`
-      powerfoodScore += 20
-      totalScore.value = powerfoodScore
-      totalScore.innerHTML = `Your score: ${powerfoodScore}`
+      // foodScore += 5
+      // totalScore.value = foodScore
+      // totalScore.innerHTML = `Your score: ${foodScore}`
+      // powerfoodScore += 20
+      // totalScore.value = powerfoodScore
+      // totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition -= 1
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
@@ -805,12 +804,12 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
-      foodScore += 5
-      totalScore.value = foodScore
-      totalScore.innerHTML = `Your score: ${foodScore}`
-      powerfoodScore += 20
-      totalScore.value = powerfoodScore
-      totalScore.innerHTML = `Your score: ${powerfoodScore}`
+      // foodScore += 5
+      // totalScore.value = foodScore
+      // totalScore.innerHTML = `Your score: ${foodScore}`
+      // powerfoodScore += 20
+      // totalScore.value = powerfoodScore
+      // totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition -= width
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
@@ -833,33 +832,52 @@ function main() {
         }, 10)
       }
       cells[eaterPosition].classList.remove('eater')
-      foodScore += 5
-      totalScore.value = foodScore
-      totalScore.innerHTML = `Your score: ${foodScore}`
-      powerfoodScore += 20
-      totalScore.value = powerfoodScore
-      totalScore.innerHTML = `Your score: ${powerfoodScore}`
       eaterPosition += width
       cells[eaterPosition].classList.remove('food')
       cells[eaterPosition].classList.remove('powerfood')
       cells[eaterPosition].classList.add('eater')
     }
-  })
+    if (cells[eaterPosition].classList.contains('food')) {
+      foodScore += 5
+      totalScore.value = foodScore
+      totalScore.innerHTML = `Your score: ${foodScore}`
+    }
+    if (cells[eaterPosition].classList.contains('powerfood')) {
+      powerfoodScore += 20
+      totalScore.value = powerfoodScore
+      totalScore.innerHTML = `Your score: ${powerfoodScore}`
+    }
+    if (totalScore === maxScore) {
+      alert('Congratulations! You have won the game!')
+    }
+  }
+  )
+  function gameOver() {
+    if (livesCount <= 0) {
+      alert('Game over!')
+    }
+  }
+  gameOver()
 
-  // function scores() {
-  //   if (eaterPosition === cells[eaterPosition].classList.contains('food')) {
-  //     score += 5
-  //     totalScore.value = score
-  //     totalScore.innerHTML = `Your score: ${score}`
-  //   }
-  //   if (eaterPosition === 22 || eaterPosition === 46 || eaterPosition === 146 || eaterPosition === 200) {
-  //     score += 20
-  //     totalScore.value = score
-  //     totalScore.innerHTML = `Your score: ${score}`
-  //   }
-  // }
-  // totalScore()
 
 }
+
+
+
+
+// function scores() {
+//   if (eaterPosition === cells[eaterPosition].classList.contains('food')) {
+//     score += 5
+//     totalScore.value = score
+//     totalScore.innerHTML = `Your score: ${score}`
+//   }
+//   if (eaterPosition === 22 || eaterPosition === 46 || eaterPosition === 146 || eaterPosition === 200) {
+//     score += 20
+//     totalScore.value = score
+//     totalScore.innerHTML = `Your score: ${score}`
+//   }
+// }
+// totalScore()
+
 
 window.addEventListener('DOMContentLoaded', main)
