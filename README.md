@@ -1,7 +1,8 @@
 ### ![GA](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png) 
 General Assembly, Software Engineering Immersive
 
-# ![logo](images/logo.png)
+![logo](images/logo.png)
+# MacMan
 
 ## Overview
 Mac Man is based on the 80s' classic arcade game.  It was my first big individual project that was a part of my Software Engineering Immersive course at General Assembly. The objective was to create a grid-based game to be rendered in a browser using 'vanilla' JavaScript, HTML, and CSS. The project was to be completed within a week, and it gave me an opportunity to practice and apply knowledge gained thus far by interacting with DOM objects. 
