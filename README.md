@@ -117,9 +117,77 @@ document.addEventListener('keydown', (event) => {
     cells[eaterPosition].classList.add('eater')
 ```
 ## Scale Movement
+Each `Scale` has a single function to determine its movements. Using a `setInterval` at 150 milliseconds, the scales are moving at a relatively fast pace, and the direction of movements are randomised. 
 
+To avoid scales 'merging' with walls, the checks are being made for one cell ahead of the scale's direction. If there is a wall ahead, one of the functions `randomBut<direction>()` are called. 
+
+For instance, the example below illustrates the scale's current direction to be left. In this case, if there's a wall on in front (on the left from the user's perspective), and the scale's current position is top left corner, function `randomButLeftUp()` is called. The output will be a movement that was randomly selected from an array `directionButLeftUp`. 
+```js   
+const directionButLeftUp = ['right', 'down']
+
+function randomButLeftUp() {
+  const random = Math.floor(Math.random() * directionButLeftUp.length)
+  return directionButLeftUp[random]
+}
+```
+This essentially eliminates the possibility of going left and up where the walls are.
+
+This logic is repeated for all potential 'wall merging' scenarios. 
+
+```js
+function scale1Chase() {
+    const scale1Interval = setInterval(() => {
+    // CURRENT DIRECTION - LEFT
+    if (scale1PositionDirection === 'left') {
+      // CHECKS FOR WALL CLASHES
+      if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position - width].classList.contains('walls')) {
+        scale1PositionDirection = randomButLeftUp()
+        return
+      } else if (cells[scale1Position - 1].classList.contains('walls') && cells[scale1Position + width].classList.contains('walls')) {
+        scale1PositionDirection = randomButLeftDown()
+        return
+      } else if (cells[scale1Position - 1].classList.contains('walls')) {
+        scale1PositionDirection = randomButLeft()
+        return
+      } else if (cells[scale1Position - width].classList.contains('walls') && !cells[scale1Position - 1].classList.contains('walls')) {
+        scale1PositionDirection = randomButRightUp()
+        if (scale1PositionDirection === 'left') {
+          cells[scale1Position].classList.remove('scale1')
+          scale1Position--
+          cells[scale1Position].classList.add('scale1')
+          return
+        }
+        return
+      }
+      cells[scale1Position].classList.remove('scale1')
+      scale1Position--
+      cells[scale1Position].classList.add('scale1')
+    }
+  }, 150)
+}
+scale1Chase()
+```
 ## Collisions
-
+In the event of `scale` and `eater` collision, the player loses one life and is the `eater` is returned to its starting position after 10 milliseconds. The setTimeout was added to allow the time necessary for a smoother transition and to avoid the `eater` appearing in two different locations at the same time.
+```js
+// SCALE1 AND EATER COLLISION
+if (scale1Position === eaterPosition) {
+  cells[eaterPosition].classList.remove('eater')
+  livesCount -= 1
+  lives.value = livesCount
+  lives.innerHTML = `Life: ${livesCount}`
+  setTimeout(() => {
+    eaterPosition = 112
+    cells[eaterPosition].classList.add('eater')
+  }, 10)
+}
+```
+To avoid overlapping of the `scales`, the position checks are done for the cell ahead, rather than the character's actual current position. This will prevent the characters to 'fuse' together where one, or the other, visually disappears from the map from the player's perspective. 
+```js
+if (cells[scale1Position + 1] === scale2Position || cells[scale1Position + 1] === scale3Position || cells[scale1Position + 1] === scale4Position) {
+  return
+}
+```
 ## Variables
 - player: the index of the cell the player is on
 - score: every time the player moves onto a cell with the food class on it, 1 is added to the score; if the player collides with a ghost while the state frightened is true, 100 is added to the score.
