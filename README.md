@@ -13,7 +13,7 @@ To understand the following documentation, please note that the corresponding ch
 * Pac-Man = `Eater`
 * Ghosts = `Scale1`, `Scale2`, `Scale3`, `Scale4`
 * Coins = `Food`
-* Power pellet = `Powerfoood`
+* Power pellet = `Powerfood`
 
 Given the time restrictions, the game is not fully developed and there are a few bugs. However, it has its MVP and you can play it [here](https://hvan307.github.io/MacMan/) and the GitHub repo can be accessed [here](https://github.com/hvan307/MacMan). 
 
@@ -221,6 +221,9 @@ This would give me more time to fix the bugs and minor issues, so I can have a m
 * Creating 'identities' and different behavioural patterns for each of the scales
 * Further levels and alternative maps
 
+## Wins
+* Understanding and consolidating DOM Object manipulation knowledge.
+* Resolving the scale repetitive movements when reaching corner locations on the map.
 
 ## Screenshots
 ![welcome-page](images/welcome-page.png)
