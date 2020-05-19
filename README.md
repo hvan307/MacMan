@@ -21,9 +21,9 @@ Given the time restrictions, the game is not fully developed and there are a few
 - Render a game in the browser
 - Design logic for winning & visually display which layer won
 - Include separate HTML / CSS / JavaScript files
-- Stick with KISS (Keep It Simple Stupid) and DRY Don't Repeat Yourself) principles
+- Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles
 - Use Javascript for DOM manipulation
-- Deploy your game online, where the rest of the world an access it
+- Deploy the game online, where the rest of the world an access it
 - Use semantic markup for HTML and CSS (adhere to best ractices)
 
 ## The Technologies used
